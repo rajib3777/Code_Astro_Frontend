@@ -14,12 +14,27 @@ function BigWorldGlobe({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
         width: '100%',
         maxWidth: 760,
         aspectRatio: '1 / 1',
-        transform: `perspective(1400px) rotateY(${mouseX * 7}deg) rotateX(${-mouseY * 6}deg)`,
-        transition: 'transform 0.12s ease-out',
+        transform: `perspective(1400px) rotateY(${mouseX * 6}deg) rotateX(${-mouseY * 5}deg)`,
+        transition: 'transform 0.15s ease-out',
+        willChange: 'transform',
       }}
     >
+      {/* High-Performance Ambient Glow Aura (Replaces heavy SVG dual drop-shadows that crash mobile GPU) */}
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: '88%',
+          height: '88%',
+          top: '6%',
+          left: '6%',
+          background: 'radial-gradient(circle, rgba(0, 102, 255, 0.38) 0%, rgba(0, 212, 255, 0.18) 45%, transparent 72%)',
+          boxShadow: '0 0 60px rgba(0, 102, 255, 0.35)',
+          zIndex: 5,
+        }}
+      />
+
       {/* Outer atmosphere glow rings */}
-      {[1.4, 1.25, 1.12].map((scale, i) => (
+      {[1.35, 1.22, 1.1].map((scale, i) => (
         <div
           key={i}
           className="absolute rounded-full pointer-events-none"
@@ -30,7 +45,7 @@ function BigWorldGlobe({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
             width: `${scale * 100}%`,
             height: `${scale * 100}%`,
             border: `1px solid rgba(0, ${120 + i * 30}, 255, ${0.08 - i * 0.02})`,
-            boxShadow: i === 0 ? '0 0 80px rgba(0, 102, 255, 0.2)' : 'none',
+            boxShadow: i === 0 ? '0 0 50px rgba(0, 102, 255, 0.2)' : 'none',
             animation: `pulse-ring ${5 + i}s ease-in-out infinite`,
             animationDelay: `${i * 0.8}s`,
           }}
@@ -42,7 +57,8 @@ function BigWorldGlobe({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
         viewBox="0 0 500 500"
         className="relative z-10 w-full h-full"
         style={{
-          filter: 'drop-shadow(0 0 80px rgba(0, 102, 255, 0.45)) drop-shadow(0 0 160px rgba(0, 212, 255, 0.25))',
+          filter: 'drop-shadow(0 0 25px rgba(0, 102, 255, 0.45))',
+          willChange: 'transform',
         }}
       >
         <defs>
@@ -91,13 +107,9 @@ function BigWorldGlobe({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
             <circle cx="250" cy="250" r="230" />
           </clipPath>
 
-          {/* Landmass filter */}
-          <filter id="land-glow-filter" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+          {/* Landmass hardware-accelerated neon glow */}
+          <filter id="land-glow-filter" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="0" stdDeviation="1.5" floodColor="#00d4ff" floodOpacity="0.5" />
           </filter>
         </defs>
 
@@ -349,19 +361,31 @@ function BigWorldGlobe({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
 ══════════════════════════════════════════════════════ */
 export default function HeroSection({ hero }: { hero?: any; stats?: any[] }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
-    setIsVisible(true)
+    // Only track mouse tilt on devices with a fine pointer (mouse), not touch screens
+    if (typeof window === 'undefined' || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      return
+    }
+
+    let rAF: number | null = null
     const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
+      if (rAF !== null) return
+      rAF = window.requestAnimationFrame(() => {
+        const { innerWidth, innerHeight } = window
+        setMousePos({
+          x: (e.clientX / innerWidth) * 2 - 1,
+          y: (e.clientY / innerHeight) * 2 - 1,
+        })
+        rAF = null
       })
     }
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (rAF !== null) cancelAnimationFrame(rAF)
+    }
   }, [])
 
   return (
@@ -385,18 +409,18 @@ export default function HeroSection({ hero }: { hero?: any; stats?: any[] }) {
         }}
       />
 
-      {/* Massive Shiny Blue Radiant Energy Flare behind the globe */}
+      {/* Massive Shiny Blue Radiant Energy Flare behind the globe (hardware accelerated) */}
       <div
         className="absolute pointer-events-none"
         style={{
           top: '35%',
           left: '50%',
-          transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-          width: 'clamp(500px, 70vw, 1000px)',
-          height: 'clamp(500px, 70vw, 1000px)',
-          background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%)',
-          filter: 'blur(90px)',
+          transform: `translate(-50%, -50%) translate(${mousePos.x * 15}px, ${mousePos.y * 15}px)`,
+          width: 'clamp(450px, 65vw, 950px)',
+          height: 'clamp(450px, 65vw, 950px)',
+          background: 'radial-gradient(circle, rgba(0, 102, 255, 0.28) 0%, rgba(0, 212, 255, 0.14) 35%, rgba(0, 102, 255, 0.04) 55%, transparent 72%)',
           transition: 'transform 0.2s ease-out',
+          willChange: 'transform',
         }}
       />
 

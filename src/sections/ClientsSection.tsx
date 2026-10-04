@@ -17,8 +17,8 @@ export default function ClientsSection(_props: ClientsSectionProps = {}) {
     ? clients.map((c) => c.name)
     : FALLBACK_CLIENTS
 
-  // duplicate for seamless ticker
-  const doubled = [...items, ...items, ...items]
+  // duplicate exactly once for seamless -50% translateX ticker
+  const doubled = [...items, ...items]
 
   return (
     <section

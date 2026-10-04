@@ -328,8 +328,8 @@ const CORE_STACK_NAMES = [
   'JavaScript (JS)', 'HTML5', 'CSS3', 'C++', 'React & Next.js'
 ]
 
-// Compact, Ultra-Sleek Technology Card
-function TechCard({
+// Compact, Ultra-Sleek Technology Card (Memoized for zero mobile scroll jank)
+const TechCard = React.memo(function TechCard({
   tech,
   index,
   isActive,
@@ -516,7 +516,7 @@ function TechCard({
       </div>
     </div>
   )
-}
+})
 
 export default function TechnologiesSection({ technologies }: { technologies?: any[] }) {
   const [activeCategory, setActiveCategory] = useState<string>('core')
@@ -557,7 +557,11 @@ export default function TechnologiesSection({ technologies }: { technologies?: a
           const currentDistance = startTrigger - rect.top
 
           const p = Math.max(0, Math.min(1, currentDistance / Math.max(1, totalDistance)))
-          setScrollProgress(p)
+          // Quantize progress to avoid re-rendering 20 cards on every sub-pixel scroll on mobile
+          setScrollProgress((prev) => {
+            if (Math.abs(prev - p) < 0.012 && p > 0 && p < 1) return prev
+            return p
+          })
         }
         rAF = null
       })

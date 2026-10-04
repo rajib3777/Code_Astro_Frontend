@@ -1,4 +1,9 @@
+import { useId } from 'react'
+
 export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
+  const rawId = useId()
+  const uid = rawId.replace(/[^a-zA-Z0-9_-]/g, '')
+
   return (
     <div
       className="relative w-full overflow-hidden pointer-events-none"
@@ -7,6 +12,7 @@ export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
         margin: '-40px 0',
         zIndex: 20,
         transform: flip ? 'scaleX(-1)' : 'none',
+        willChange: 'transform',
       }}
     >
       <svg
@@ -14,9 +20,10 @@ export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
         fill="none"
         preserveAspectRatio="none"
         className="w-full h-full"
+        style={{ willChange: 'transform' }}
       >
         <defs>
-          <linearGradient id="flow-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id={`flow-glow-${uid}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#0066ff" stopOpacity="0" />
             <stop offset="20%" stopColor="#0066ff" stopOpacity="0.4" />
             <stop offset="50%" stopColor="#00d4ff" stopOpacity="0.9" />
@@ -24,12 +31,8 @@ export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
             <stop offset="100%" stopColor="#0066ff" stopOpacity="0" />
           </linearGradient>
 
-          <filter id="beam-filter" x="-20%" y="-40%" width="140%" height="180%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+          <filter id={`beam-filter-${uid}`} x="-10%" y="-30%" width="120%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor="#00d4ff" floodOpacity="0.75" />
           </filter>
         </defs>
 
@@ -44,11 +47,11 @@ export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
         {/* Crisp energetic beam */}
         <path
           d="M 0 40 Q 360 10, 720 40 T 1440 40"
-          stroke="url(#flow-glow)"
+          stroke={`url(#flow-glow-${uid})`}
           strokeWidth="2"
           fill="none"
           strokeDasharray="120 400"
-          filter="url(#beam-filter)"
+          filter={`url(#beam-filter-${uid})`}
         >
           <animate
             attributeName="stroke-dashoffset"
@@ -59,7 +62,7 @@ export default function BlueEnergyFlow({ flip = false }: { flip?: boolean }) {
         </path>
 
         {/* Orbiting energy spark */}
-        <circle r="4" fill="#ffffff" filter="url(#beam-filter)">
+        <circle r="4" fill="#ffffff" filter={`url(#beam-filter-${uid})`}>
           <animateMotion
             path="M 0 40 Q 360 10, 720 40 T 1440 40"
             dur="4s"

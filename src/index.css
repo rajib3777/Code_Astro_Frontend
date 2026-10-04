@@ -608,7 +608,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* Ticker */
 .ticker-wrap  { overflow: hidden; width: 100%; position: relative; }
-.ticker-inner { display: flex; width: max-content; }
+.ticker-inner {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
 .ticker-inner:hover { animation-play-state: paused; }
 
 /* Scrollbar */
@@ -740,10 +746,28 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ── Global overflow guard — NO horizontal scroll ever ── */
 html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 * { min-width: 0; }
+
+/* Mobile hardware acceleration & layer stabilization (eliminates blank flashes and shaky motion) */
+@media (max-width: 768px) {
+  .ticker-wrap, .ticker-inner, #hero svg, .sec, section {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  [style*="backdropFilter"],
+  [style*="backdrop-filter"] {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
 
 /* ── Tablet & below (≤ 900px) ── */
 @media (max-width: 900px) {

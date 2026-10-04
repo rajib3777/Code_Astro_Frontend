@@ -9,7 +9,7 @@ interface RevealProps {
 }
 
 export default function Reveal({ children, delay = 0, className = '', direction = 'up' }: RevealProps) {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { ref, inView } = useInView({ threshold: 0.05, rootMargin: '80px 0px', triggerOnce: true })
 
   const variants = {
     hidden: {
