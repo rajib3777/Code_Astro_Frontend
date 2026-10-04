@@ -379,14 +379,25 @@ export default function ServicesSection({ services: propServices }: ServicesSect
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ textAlign: 'center', marginTop: 48 }}>
+        <div style={{ textAlign: 'center', marginTop: 48, width: '100%', display: 'flex', justifyContent: 'center', padding: '0 12px' }}>
           <Link
             to="/contact"
             className="btn btn-primary"
-            style={{ padding: '12px 28px', fontSize: '0.92rem' }}
+            style={{
+              padding: 'clamp(10px, 2.5vw, 13px) clamp(16px, 4vw, 28px)',
+              fontSize: 'clamp(0.78rem, 2.8vw, 0.92rem)',
+              maxWidth: '100%',
+              whiteSpace: 'normal',
+              textAlign: 'center',
+              lineHeight: 1.35,
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+            }}
           >
-            Request Custom Architecture Consultation
-            <ArrowRight size={15} />
+            <span>Request Custom Architecture Consultation</span>
+            <ArrowRight size={15} style={{ flexShrink: 0 }} />
           </Link>
         </div>
       </div>

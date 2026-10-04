@@ -854,12 +854,16 @@ html, body {
   .tag { font-size: 0.65rem; padding: 0.15rem 0.5rem; }
 
   /* Buttons */
+  .btn,
   .btn-primary,
   .btn-ghost,
   .btn-secondary {
-    padding: 0.7rem 1.25rem;
+    padding: 0.7rem 1.2rem;
     font-size: 0.82rem;
-    white-space: nowrap;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
   }
 
   /* Prose */
@@ -871,11 +875,14 @@ html, body {
   .t-hero { font-size: 1.4rem; }
   .container-wide, .wrap { padding: 0 0.75rem; }
 
+  .btn,
   .btn-primary,
   .btn-ghost,
   .btn-secondary {
-    padding: 0.65rem 1rem;
-    font-size: 0.78rem;
+    padding: 0.65rem 0.95rem;
+    font-size: 0.76rem;
+    max-width: 100%;
+    white-space: normal;
   }
 }
 
