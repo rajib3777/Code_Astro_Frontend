@@ -480,8 +480,8 @@ export default function HeroSection({ hero }: { hero?: any; stats?: any[] }) {
             transition: 'all 0.65s ease 0.2s',
           }}
         >
-          We build mission-critical enterprise software, interactive arcade & gaming systems,
-          and intelligent IoT automation architectures designed to scale globally.
+          We build customized software solutions, modern mobile & web applications,
+          AI automation workflows, and high-performance digital platforms that scale globally.
         </p>
 
         {/* ── 4. CENTERED ACTION BUTTONS ── */}

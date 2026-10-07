@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Code2,
   Cpu,
-  Gamepad2,
   Globe,
   Database,
   Smartphone,
@@ -16,6 +15,12 @@ import {
   Layers,
   Activity,
   CheckCircle2,
+  ShoppingBag,
+  GraduationCap,
+  Brain,
+  Users,
+  ShieldAlert,
+  ShieldCheck,
 } from 'lucide-react'
 import type { Service } from '@/types/api'
 
@@ -25,12 +30,25 @@ export interface ServicesSectionProps {
 
 const ICONS: Record<string, any> = {
   code: Code2,
+  Code2: Code2,
   cpu: Cpu,
-  game: Gamepad2,
   globe: Globe,
+  Globe: Globe,
   db: Database,
   mobile: Smartphone,
+  Smartphone: Smartphone,
   shield: Shield,
+  Shield: Shield,
+  ShieldAlert: ShieldAlert,
+  ShieldCheck: ShieldCheck,
+  ShoppingBag: ShoppingBag,
+  shopping: ShoppingBag,
+  GraduationCap: GraduationCap,
+  training: GraduationCap,
+  Brain: Brain,
+  ai: Brain,
+  Users: Users,
+  users: Users,
   zap: Zap,
 }
 
@@ -38,80 +56,106 @@ const FALLBACK_SERVICES = [
   {
     id: 1,
     name: 'Custom Software Development',
-    slug: 'custom-software',
-    tagline: 'High-Concurrency Web & Enterprise Systems',
+    slug: 'custom-software-development',
+    tagline: 'Tailored Enterprise & Cloud Architectures',
     short_description:
-      'We architect and engineer distributed cloud applications, resilient REST/GraphQL APIs, and mission-critical enterprise systems designed for infinite scalability and zero downtime.',
-    icon: 'code',
+      'Build customized software solutions tailored to specific business requirements and workflows.',
+    icon: 'Code2',
     color: '#0066ff',
     is_featured: true,
-    features: ['Microservices & Event Mesh', 'Zero-Downtime CI/CD', 'Sub-millisecond Query Latency', 'SOC-2 Compliance'],
+    features: ['Bespoke Enterprise Systems', 'Scalable Microservices Fabric', 'API Integration & Pipelines', 'Full Code Ownership'],
     sla: '99.99% Availability',
   },
   {
     id: 2,
-    name: 'Arcade & Interactive Gaming Tech',
-    slug: 'gaming',
-    tagline: 'Embedded Gaming Engines & Machine Telemetry',
+    name: 'Mobile App Development',
+    slug: 'mobile-app-development',
+    tagline: 'High-Performance iOS & Android Applications',
     short_description:
-      'Custom arcade operating systems, ultra-low-latency input controllers, multiplayer synchronization servers, and high-frequency display engines with native hardware acceleration.',
-    icon: 'game',
+      'Develop modern, responsive, and user-friendly mobile applications for Android and iOS.',
+    icon: 'Smartphone',
     color: '#00d4ff',
     is_featured: true,
-    features: ['Low-Latency Input Drivers', 'Real-Time Player Sync', 'Telemetry Monitoring', 'Embedded Linux Builds'],
-    sla: 'Sub-4ms Input Latency',
+    features: ['Cross-Platform Flutter & Native', 'Offline-First Local Sync', 'Biometric Authentication', 'Smooth 60fps Micro-UI'],
+    sla: '60fps Native Speed',
   },
   {
     id: 3,
-    name: 'Industrial Automation & SCADA',
-    slug: 'automation',
-    tagline: 'Connected PLC Networks & Hardware IoT',
+    name: 'E-commerce Solutions',
+    slug: 'ecommerce-solutions',
+    tagline: 'Scalable Digital Commerce & Multi-Vendor Stores',
     short_description:
-      'End-to-end industrial software: PLC programming, SCADA telemetry dashboards, edge IoT gateway daemons, and automated sensor pipeline integration for modern manufacturing plants.',
-    icon: 'cpu',
-    color: '#38bdf8',
+      'Build complete and scalable e-commerce solutions for online businesses, including product, order, payment, and customer management.',
+    icon: 'ShoppingBag',
+    color: '#10b981',
     is_featured: true,
-    features: ['Modbus & CAN-bus Protocols', 'Fault Anomaly Detection', 'Secure Edge Gateways', 'Real-Time Telemetry'],
-    sla: 'Fault-Tolerant Redundancy',
+    features: ['Dynamic Storefronts & Catalogs', 'Order & Inventory Automation', 'Multi-Gateway Checkout', 'Customer Loyalty Portals'],
+    sla: 'High-Conversion Checkout',
   },
   {
     id: 4,
-    name: 'Mobile Engineering & Cross-Platform',
-    slug: 'mobile',
-    tagline: 'Buttery Smooth iOS & Android Applications',
+    name: 'Web Development',
+    slug: 'web-development',
+    tagline: 'Modern, Secure & Responsive Web Platforms',
     short_description:
-      'High-performance native and cross-platform mobile apps with offline-first synchronization, biometric security, and responsive UI micro-animations tailored for millions of active users.',
-    icon: 'mobile',
-    color: '#60a5fa',
-    is_featured: false,
-    features: ['Offline-First SQLite Cache', 'Biometric WebAuthn', 'Real-time Push Mesh', 'Native Metal / Vulkan UI'],
-    sla: '60fps Butter Smooth',
+      'Develop modern, secure, responsive, and high-performance websites and web applications.',
+    icon: 'Globe',
+    color: '#38bdf8',
+    is_featured: true,
+    features: ['React & Next.js Architecture', 'Mobile-First Responsive Layout', 'Sub-Second Page Performance', 'Hardened Web Standards'],
+    sla: 'Sub-second Load Times',
   },
   {
     id: 5,
-    name: 'Cloud Infrastructure & DevOps',
-    slug: 'cloud',
-    tagline: 'Kubernetes Clusters & Automated Multi-Region Deployments',
+    name: 'Training & Earning',
+    slug: 'training-earning',
+    tagline: 'Hands-On Tech Skills & Career Development',
     short_description:
-      'Enterprise cloud topology: automated Terraform IaC, multi-region Kubernetes clusters, automated rollback pipelines, and distributed observability stacks across AWS, GCP, and Azure.',
-    icon: 'globe',
-    color: '#1a7aff',
-    is_featured: false,
-    features: ['Kubernetes Orchestration', 'Terraform & OpenTofu', 'Distributed Tracing', 'Multi-Region Failover'],
-    sla: 'Self-Healing Topology',
+      'Provide practical technology training and help learners develop digital skills for professional and earning opportunities.',
+    icon: 'GraduationCap',
+    color: '#8b5cf6',
+    is_featured: true,
+    features: ['Practical Project Curriculum', 'Senior Engineer Mentorship', 'Career & Freelance Readiness', 'Hands-On Skill Verification'],
+    sla: 'Industry Ready Skills',
   },
   {
     id: 6,
-    name: 'AI Engineering & Data Intelligence',
-    slug: 'ai-data',
-    tagline: 'Autonomous Intelligence & Real-Time Data Pipelines',
+    name: 'AI Automation',
+    slug: 'ai-automation',
+    tagline: 'Intelligent Process Automation & Workflow Efficiency',
     short_description:
-      'Machine learning model deployment, vector retrieval engines, real-time Kafka streaming pipelines, and automated intelligence integrations that grant a tangible operational advantage.',
-    icon: 'db',
-    color: '#0055ff',
-    is_featured: false,
-    features: ['Vector Search & RAG', 'Streaming Kafka Telemetry', 'Sub-second Anomaly Alerts', 'Secure On-Prem LLM'],
-    sla: 'Real-Time Ingestion',
+      'Use AI-powered automation to streamline business processes, reduce repetitive tasks, improve productivity, and increase operational efficiency.',
+    icon: 'Brain',
+    color: '#f59e0b',
+    is_featured: true,
+    features: ['End-to-End Workflow Automation', 'AI Chatbots & Virtual Agents', 'Intelligent Document Extraction', 'Operational Cost Reductions'],
+    sla: 'Automated Efficiency',
+  },
+  {
+    id: 7,
+    name: 'Remote Developer Hiring',
+    slug: 'remote-developer-hiring',
+    tagline: 'Vetted Dedicated Tech Talent & Team Augmentation',
+    short_description:
+      'Help businesses hire skilled remote developers according to their project requirements and technical needs.',
+    icon: 'Users',
+    color: '#ec4899',
+    is_featured: true,
+    features: ['Pre-Vetted Senior Engineers', 'Flexible Engagement Models', 'Immediate Tooling Integration', 'Transparent Sprint Reporting'],
+    sla: 'Top 3% Vetted Talent',
+  },
+  {
+    id: 8,
+    name: 'Website Malware Detection & Removal',
+    slug: 'malware-detection-removal',
+    tagline: 'Comprehensive Web Security & Threat Cleanup',
+    short_description:
+      'Detect and remove malware, malicious code, suspicious files, redirects, and other security threats from compromised websites.',
+    icon: 'ShieldAlert',
+    color: '#ef4444',
+    is_featured: true,
+    features: ['Deep File & Webshell Scanning', 'Malicious Redirect Eradication', 'Database & Admin Disinfection', 'Firewall Hardening & Un-Blacklist'],
+    sla: 'Rapid Security Response',
   },
 ]
 
@@ -361,7 +405,7 @@ export default function ServicesSection({ services: propServices }: ServicesSect
             </span>
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '1rem', lineHeight: 1.7, margin: '0 auto', maxWidth: 560 }}>
-            From high-throughput cloud architectures to industrial machine firmware — Code Astro delivers mission-critical engineering solutions.
+            From custom software and mobile apps to e-commerce, AI automation, and security — Code Astro delivers tailored digital solutions.
           </p>
         </div>
 
@@ -373,7 +417,7 @@ export default function ServicesSection({ services: propServices }: ServicesSect
             gap: 14,
           }}
         >
-          {services.slice(0, 6).map((service: any, i: number) => (
+          {services.map((service: any, i: number) => (
             <ServiceDrawerCard key={service.id || i} service={service} index={i} />
           ))}
         </div>

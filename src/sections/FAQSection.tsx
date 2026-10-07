@@ -9,7 +9,7 @@ const FALLBACK_FAQS = [
     id: 1,
     question: 'What types of software engineering projects does Code Astro specialize in?',
     answer:
-      'Code Astro specializes in high-concurrency cloud applications, custom arcade & gaming hardware/software systems, industrial IoT telemetry, and enterprise microservices. We handle the entire lifecycle from architecture and security audits to production deployment.',
+      'Code Astro specializes in custom software development, mobile apps, e-commerce solutions, web development, AI automation, remote developer staffing, and website malware detection & removal. We handle the entire lifecycle from architecture and security audits to production deployment.',
     category: 'General',
   },
   {

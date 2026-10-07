@@ -111,7 +111,7 @@ export default function AboutUsSection() {
               Founded with a mission to make elite software engineering accessible to every ambitious company. We combine startup speed with enterprise-grade quality.
             </p>
             <p className="t-body mb-8" style={{ color: '#3d5280', maxWidth: 520 }}>
-              Our team specializes in gaming technology, industrial automation, custom software, and AI-powered systems. We don't just write code — we engineer business outcomes.
+              Our team specializes in custom software development, mobile apps, e-commerce, web development, and AI-powered automation. We don't just write code — we engineer business outcomes.
             </p>
 
             <Link to="/about" className="btn btn-primary" style={{ gap: 8 }}>

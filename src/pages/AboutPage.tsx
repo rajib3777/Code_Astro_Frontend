@@ -8,7 +8,7 @@ import { LinkedinIcon, TwitterIcon, GithubIcon } from '@/components/ui/SocialIco
 import BlueEnergyFlow from '@/components/ui/BlueEnergyFlow'
 
 const STATS_FALLBACK = [
-  { val: '200+', label: 'Shipped Systems', desc: 'Enterprise apps, gaming & automation', icon: Code2 },
+  { val: '200+', label: 'Shipped Systems', desc: 'Enterprise apps, web & mobile platforms', icon: Code2 },
   { val: '99.99%', label: 'Infrastructure Uptime', desc: 'Continuous zero-downtime SLA', icon: ShieldCheck },
   { val: '50+', label: 'Global Clients', desc: 'In 18+ countries worldwide', icon: Globe },
   { val: '<10ms', label: 'Processing Telemetry', desc: 'Sub-millisecond edge latency', icon: Cpu },

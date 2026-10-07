@@ -32,11 +32,14 @@ function LinkedinIcon({ size = 15, color = 'currentColor' }: { size?: number; co
 
 const NAV = {
   Services: [
-    { label: 'Custom Software Dev', href: '/services' },
-    { label: 'Gaming & Arcade Tech', href: '/services' },
-    { label: 'Industrial Automation', href: '/services' },
-    { label: 'AI & Data Solutions', href: '/services' },
-    { label: 'Cloud & DevOps', href: '/services' },
+    { label: 'Custom Software Development', href: '/services/custom-software-development' },
+    { label: 'Mobile App Development', href: '/services/mobile-app-development' },
+    { label: 'E-commerce Solutions', href: '/services/ecommerce-solutions' },
+    { label: 'Web Development', href: '/services/web-development' },
+    { label: 'Training & Earning', href: '/services/training-earning' },
+    { label: 'AI Automation', href: '/services/ai-automation' },
+    { label: 'Remote Developer Hiring', href: '/services/remote-developer-hiring' },
+    { label: 'Website Malware Detection & Removal', href: '/services/website-malware-detection-removal' },
   ],
   Company: [
     { label: 'About Us', href: '/#about' },
@@ -157,7 +160,7 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
             </Link>
 
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.7, marginBottom: 24, maxWidth: 260 }}>
-              World-class software engineering. Gaming systems, automation platforms, and custom apps that scale.
+              World-class software engineering. Modern web & mobile apps, AI automation, and secure enterprise platforms that scale.
             </p>
 
             {/* Contact info */}

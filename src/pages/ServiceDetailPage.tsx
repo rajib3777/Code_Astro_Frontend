@@ -15,7 +15,6 @@ import {
   Cpu,
   Rocket,
   Code2,
-  Gamepad2,
   Globe,
   Database,
   Zap,
@@ -26,6 +25,12 @@ import {
   Server,
   Layers,
   ChevronRight,
+  Smartphone,
+  ShoppingBag,
+  GraduationCap,
+  Brain,
+  Users,
+  ShieldAlert,
 } from 'lucide-react'
 import BlueEnergyFlow from '@/components/ui/BlueEnergyFlow'
 import type { Service } from '@/types/api'
@@ -57,333 +62,484 @@ interface ServiceData {
   }[]
 }
 
+const customSoftwareData: ServiceData = {
+  id: 1,
+  name: 'Custom Software Development',
+  slug: 'custom-software-development',
+  tagline: 'Tailored Enterprise & Cloud Architectures',
+  short_description:
+    'Build customized software solutions tailored to specific business requirements and workflows.',
+  description:
+    'Build customized software solutions tailored to specific business requirements and workflows. From distributed cloud architectures and microservices to tailored business tools, we design scalable software engineered for longevity and performance.',
+  icon: Code2,
+  color: '#0066ff',
+  sla: '99.99% Availability SLA',
+  deliveryTime: '6–12 Weeks MVP',
+  communication: 'Daily Async Standups + Bi-Weekly Demos',
+  stats: [
+    { label: 'System Uptime SLA', value: '99.99%' },
+    { label: 'P99 Query Latency', value: '< 15ms' },
+    { label: 'Architecture Scale', value: 'Horizontal' },
+    { label: 'Code Ownership', value: '100% Client' },
+  ],
+  technologies: [
+    { name: 'TypeScript', category: 'Language', color: '#3178c6' },
+    { name: 'React / Next.js', category: 'Frontend', color: '#00d4ff' },
+    { name: 'Python / Django', category: 'Backend', color: '#0066ff' },
+    { name: 'Go / Golang', category: 'High-Perf Backend', color: '#38bdf8' },
+    { name: 'PostgreSQL', category: 'Relational DB', color: '#336791' },
+    { name: 'Redis Cluster', category: 'In-Memory Cache', color: '#dc2626' },
+    { name: 'Docker & Kubernetes', category: 'Container Infra', color: '#2496ed' },
+  ],
+  features: [
+    {
+      title: 'Bespoke Enterprise Systems',
+      description: 'Tailored software architectures designed to match your specific organizational processes and data models.',
+      specs: ['Custom business logic engines', 'Zero bloat or legacy dependencies', 'Built for future feature scalability'],
+    },
+    {
+      title: 'Scalable Microservices Fabric',
+      description: 'Decoupled, high-concurrency microservices communicating with low latency and automated failover.',
+      specs: ['Decoupled fault domains', 'Fast binary gRPC & REST', 'Automatic retry & dead-letter queue'],
+    },
+    {
+      title: 'API Integration & Data Pipelines',
+      description: 'Reliable connectors for external APIs, payment channels, ERPs, and cloud storage providers.',
+      specs: ['Secure authenticated endpoints', 'Real-time event streaming', 'Comprehensive OpenAPI specs'],
+    },
+    {
+      title: 'Zero-Trust Enterprise Security',
+      description: 'End-to-end cryptographic transport encryption, role-based access control, and complete audit trails.',
+      specs: ['Strict RBAC policies', 'AES-256 encrypted storage', 'SOC-2 compliant logging'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Requirements & Architecture Blueprint', desc: 'Analyze workflows, specify system boundaries, and design relational schemas.', deliverables: 'Architecture Spec, Schema Blueprint, Sprint Milestones' },
+    { phase: 'PHASE 02', title: 'Foundation & Core Engineering', desc: 'Set up infrastructure as code, container scaffolding, and database foundations.', deliverables: 'Staging Environment, CI/CD Pipeline, Core Endpoints' },
+    { phase: 'PHASE 03', title: 'Agile Sprints & Integration', desc: 'Bi-weekly sprint demos, continuous automated unit/stress testing, and feedback cycles.', deliverables: 'Working Feature Releases, Automated Test Suite' },
+    { phase: 'PHASE 04', title: 'Hardening & Deployment', desc: 'Penetration testing, load verification, production DNS cutover, and monitoring handover.', deliverables: 'Production Release, Runbooks, 24/7 Monitoring' },
+  ],
+}
+
+const mobileAppData: ServiceData = {
+  id: 2,
+  name: 'Mobile App Development',
+  slug: 'mobile-app-development',
+  tagline: 'High-Performance iOS & Android Applications',
+  short_description:
+    'Develop modern, responsive, and user-friendly mobile applications for Android and iOS.',
+  description:
+    'Develop modern, responsive, and user-friendly mobile applications for Android and iOS. We combine fluid user interfaces with native performance, offline-first reliability, and seamless API integrations.',
+  icon: Smartphone,
+  color: '#00d4ff',
+  sla: '60fps Native Speed',
+  deliveryTime: '6–10 Weeks MVP',
+  communication: 'Bi-Weekly TestFlight & APK Releases',
+  stats: [
+    { label: 'Target Framerate', value: '60+ FPS' },
+    { label: 'Offline Sync', value: 'Instant' },
+    { label: 'App Store Pass Rate', value: '100%' },
+    { label: 'Platforms Supported', value: 'iOS & Android' },
+  ],
+  technologies: [
+    { name: 'Flutter', category: 'Cross-Platform', color: '#02569b' },
+    { name: 'React Native', category: 'Cross-Platform', color: '#61dafb' },
+    { name: 'Swift / SwiftUI', category: 'Native iOS', color: '#f05138' },
+    { name: 'Kotlin', category: 'Native Android', color: '#7f52ff' },
+    { name: 'SQLite / Realm', category: 'Local Storage', color: '#336791' },
+    { name: 'Firebase & APNs', category: 'Push Notifications', color: '#f59e0b' },
+  ],
+  features: [
+    {
+      title: 'Cross-Platform & Native Architectures',
+      description: 'Single codebase efficiency or native performance tailored to your app performance requirements.',
+      specs: ['Near-zero latency touch input', 'Native platform hardware bindings', 'Consistent cross-platform design'],
+    },
+    {
+      title: 'Offline-First Synchronization',
+      description: 'Local caching enables full app functionality without internet, syncing seamlessly once back online.',
+      specs: ['Conflict-free replicated data', 'Background sync daemon', 'Encrypted local SQLite storage'],
+    },
+    {
+      title: 'Biometric & Modern Auth',
+      description: 'Frictionless security via FaceID, TouchID, fingerprint authentication, and OAuth social login.',
+      specs: ['Hardware keychain integration', 'Encrypted biometric tokens', 'Instant PIN fallback'],
+    },
+    {
+      title: 'Fluid 60fps Micro-Animations',
+      description: 'Pixel-perfect interfaces and responsive gestures that feel buttery smooth and engaging.',
+      specs: ['Hardware-accelerated rendering', 'Adaptive haptic feedback', 'Natural drag-and-swipe gestures'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'User Flows & Wireframes', desc: 'Define intuitive mobile navigation, screen flows, and interactive mockups.', deliverables: 'Clickable Prototype, App Sitemap' },
+    { phase: 'PHASE 02', title: 'Component Engineering', desc: 'Implement core views, native device bindings, and API connectivity.', deliverables: 'Alpha Build, API Client Layer' },
+    { phase: 'PHASE 03', title: 'Cross-Device QA & TestFlight', desc: 'Test across various screen sizes, Android versions, and iOS devices.', deliverables: 'Beta Builds via TestFlight and Google Play' },
+    { phase: 'PHASE 04', title: 'Store Publishing & Launch', desc: 'Handle App Store and Google Play reviews, metadata, and production release.', deliverables: 'Live App Store & Play Store Listings' },
+  ],
+}
+
+const ecommerceData: ServiceData = {
+  id: 3,
+  name: 'E-commerce Solutions',
+  slug: 'ecommerce-solutions',
+  tagline: 'Scalable Digital Commerce & Multi-Vendor Stores',
+  short_description:
+    'Build complete and scalable e-commerce solutions for online businesses, including product, order, payment, and customer management.',
+  description:
+    'Build complete and scalable e-commerce solutions for online businesses, including product, order, payment, and customer management. We engineer conversion-optimized online storefronts, payment gateways, inventory automation, and multi-channel commerce tools.',
+  icon: ShoppingBag,
+  color: '#10b981',
+  sla: 'High-Conversion Checkout',
+  deliveryTime: '4–8 Weeks Launch',
+  communication: 'Weekly Sprint Reviews + Live Staging Store',
+  stats: [
+    { label: 'Checkout Latency', value: '< 200ms' },
+    { label: 'Payment Success Rate', value: '99.8%' },
+    { label: 'Catalog Capacity', value: '100K+ SKUs' },
+    { label: 'Security Standard', value: 'PCI-DSS Ready' },
+  ],
+  technologies: [
+    { name: 'React / Next.js', category: 'Storefront', color: '#00d4ff' },
+    { name: 'Node.js / Django', category: 'Backend Engine', color: '#0066ff' },
+    { name: 'PostgreSQL', category: 'Product Database', color: '#336791' },
+    { name: 'Redis', category: 'Cart & Session Cache', color: '#dc2626' },
+    { name: 'Stripe & PayPal', category: 'Payment Gateways', color: '#6366f1' },
+    { name: 'Elasticsearch', category: 'Product Search', color: '#f59e0b' },
+  ],
+  features: [
+    {
+      title: 'Storefront & Product Catalog',
+      description: 'Instant faceted search, variant selectors, stock statuses, and high-resolution galleries.',
+      specs: ['Sub-second product search', 'Dynamic attribute filtering', 'SEO-optimized product pages'],
+    },
+    {
+      title: 'Order & Inventory Automation',
+      description: 'Automated order processing, multi-warehouse stock management, and fulfillment status updates.',
+      specs: ['Real-time stock deduction', 'Automated packing slips & invoices', 'Shipping carrier API webhooks'],
+    },
+    {
+      title: 'Multi-Gateway Payment Checkout',
+      description: 'Fast, secure checkout supporting credit cards, mobile wallets, and regional payment providers.',
+      specs: ['One-step checkout experience', 'PCI-DSS tokenization', 'Automated fraud protection filters'],
+    },
+    {
+      title: 'Customer Accounts & Retention',
+      description: 'Order history, wishlist tracking, promotional discount coupons, and automated email receipts.',
+      specs: ['Self-serve customer portals', 'Dynamic promotional engine', 'Abandoned cart recovery workflows'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Catalog & Business Rules Discovery', desc: 'Map product hierarchies, tax requirements, shipping zones, and payment accounts.', deliverables: 'E-commerce Architecture Blueprint, Data Model' },
+    { phase: 'PHASE 02', title: 'Storefront & Checkout Build', desc: 'Design responsive storefront UI, shopping cart state, and payment integrations.', deliverables: 'Interactive Staging Store, Payment Sandboxes' },
+    { phase: 'PHASE 03', title: 'Inventory & Admin Panel Setup', desc: 'Configure order management dashboard, warehouse inventory sync, and email triggers.', deliverables: 'Admin Panel, Automated Invoicing Engine' },
+    { phase: 'PHASE 04', title: 'Load Simulation & Launch', desc: 'Conduct simulated checkout surges, verify security certificates, and execute domain switch.', deliverables: 'Live Production Storefront, Operator Guide' },
+  ],
+}
+
+const webDevData: ServiceData = {
+  id: 4,
+  name: 'Web Development',
+  slug: 'web-development',
+  tagline: 'Modern, Secure & Responsive Web Platforms',
+  short_description:
+    'Develop modern, secure, responsive, and high-performance websites and web applications.',
+  description:
+    'Develop modern, secure, responsive, and high-performance websites and web applications. We engineer responsive web applications that combine pixel-perfect UI aesthetics with fast loading speeds, bulletproof security, and modern web standards.',
+  icon: Globe,
+  color: '#38bdf8',
+  sla: 'Sub-second Load Times',
+  deliveryTime: '4–8 Weeks Deployment',
+  communication: 'Daily Git Commits + Weekly Demo Calls',
+  stats: [
+    { label: 'Core Web Vitals', value: '95+ Score' },
+    { label: 'First Contentful Paint', value: '< 0.8s' },
+    { label: 'Responsive Coverage', value: '100% Devices' },
+    { label: 'SEO Compliance', value: 'Engineered In' },
+  ],
+  technologies: [
+    { name: 'React', category: 'Frontend', color: '#00d4ff' },
+    { name: 'TypeScript', category: 'Type Safety', color: '#3178c6' },
+    { name: 'Next.js / Vite', category: 'Build Tooling', color: '#000000' },
+    { name: 'Tailwind CSS', category: 'Styling', color: '#06b6d4' },
+    { name: 'REST / GraphQL', category: 'Data Fetching', color: '#e10098' },
+    { name: 'Node.js / Python', category: 'API Backend', color: '#339933' },
+  ],
+  features: [
+    {
+      title: 'Modern Frontend Architecture',
+      description: 'Component-driven codebases built on React and TypeScript ensuring maintainability and speed.',
+      specs: ['Reusable component libraries', 'Type-safe state management', 'Modular clean architecture'],
+    },
+    {
+      title: 'Mobile-First Responsive Layouts',
+      description: 'Fluid designs that adjust effortlessly from small smartphone screens to large 4K monitors.',
+      specs: ['Adaptive typography & spacing', 'Cross-browser compatibility', 'Touch-friendly navigation controls'],
+    },
+    {
+      title: 'Performance & SEO Optimization',
+      description: 'Optimized asset bundling, code splitting, dynamic meta tags, and structured schema markup.',
+      specs: ['Sub-second page transitions', 'Optimized WebP/SVG images', 'Comprehensive Open Graph & Twitter cards'],
+    },
+    {
+      title: 'Hardened Security & Best Practices',
+      description: 'Secure authentication workflows, CSRF protection, sanitized user inputs, and strict headers.',
+      specs: ['Content Security Policy (CSP)', 'OWASP Top 10 defenses', 'SSL/TLS A+ rating configuration'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Design System & Architecture', desc: 'Create component design tokens, typography scale, responsive breakpoints, and site maps.', deliverables: 'Figma Design System, Tech Stack Specification' },
+    { phase: 'PHASE 02', title: 'Component & Page Development', desc: 'Implement modular UI components, integrate backend APIs, and configure routing.', deliverables: 'Responsive Staging Site, Dynamic Page Templates' },
+    { phase: 'PHASE 03', title: 'Cross-Browser & Performance QA', desc: 'Run automated lighthouse audits, responsive testing across 20+ device viewports.', deliverables: 'Lighthouse Performance Report, QA Sign-Off' },
+    { phase: 'PHASE 04', title: 'Deployment & SEO Verification', desc: 'Deploy to high-speed CDN, configure domain DNS, submit XML sitemaps to search engines.', deliverables: 'Live Production URL, Analytics Dashboard' },
+  ],
+}
+
+const trainingData: ServiceData = {
+  id: 5,
+  name: 'Training & Earning',
+  slug: 'training-earning',
+  tagline: 'Hands-On Tech Skills & Career Development',
+  short_description:
+    'Provide practical technology training and help learners develop digital skills for professional and earning opportunities.',
+  description:
+    'Provide practical technology training and help learners develop digital skills for professional and earning opportunities. Our hands-on curriculums cover software development, digital platforms, problem-solving, and practical project building to empower careers in the global digital economy.',
+  icon: GraduationCap,
+  color: '#8b5cf6',
+  sla: 'Industry Ready Skills',
+  deliveryTime: '8–16 Weeks Bootcamps',
+  communication: 'Live Mentorship Sessions + Dedicated Discord/Slack',
+  stats: [
+    { label: 'Practical Project Ratio', value: '80% Hands-On' },
+    { label: 'Industry Curriculum', value: '100% Modern' },
+    { label: 'Mentor Availability', value: 'Daily Support' },
+    { label: 'Career Outcomes', value: 'Job & Freelance' },
+  ],
+  technologies: [
+    { name: 'JavaScript & TS', category: 'Programming', color: '#f7df1e' },
+    { name: 'React & Frontend', category: 'Web Framework', color: '#00d4ff' },
+    { name: 'Python & Django', category: 'Backend Track', color: '#0066ff' },
+    { name: 'Git & GitHub', category: 'Version Control', color: '#f05032' },
+    { name: 'SQL & Databases', category: 'Data Management', color: '#336791' },
+    { name: 'Freelance Platforms', category: 'Career Strategy', color: '#10b981' },
+  ],
+  features: [
+    {
+      title: 'Practical Project Curriculum',
+      description: 'Learn by building real, working web applications and software tools instead of theoretical slide decks.',
+      specs: ['Portfolio-ready capstone projects', 'Industry-standard git workflows', 'Clean code conventions'],
+    },
+    {
+      title: 'Direct Senior Engineer Mentorship',
+      description: 'Get code reviews, live pair programming, and architectural feedback from working software engineers.',
+      specs: ['Line-by-line pull request reviews', 'Weekly 1-on-1 office hours', 'Real-world problem troubleshooting'],
+    },
+    {
+      title: 'Career & Earning Roadmap',
+      description: 'Guidance on building compelling developer portfolios, resume optimization, and freelance pitching.',
+      specs: ['Upwork & remote job strategies', 'Technical interview prep', 'Contract negotiation basics'],
+    },
+    {
+      title: 'Collaborative Learning Community',
+      description: 'Engage with fellow learners, collaborate on group projects, and build a lasting professional network.',
+      specs: ['Active community forum', 'Hackathons and coding challenges', 'Alumni support network'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Fundamentals & Tooling Setup', desc: 'Master development environment configuration, git version control, and core programming principles.', deliverables: 'Configured Dev Environment, First Code Repositories' },
+    { phase: 'PHASE 02', title: 'Full-Stack Project Development', desc: 'Build responsive frontend interfaces, design backend APIs, and connect relational databases.', deliverables: 'Interactive Web Apps, Working REST APIs' },
+    { phase: 'PHASE 03', title: 'Capstone Product Engineering', desc: 'Plan and build a complete full-stack product with authentication, database, and cloud deployment.', deliverables: 'Published Live Capstone Project, Public GitHub Code' },
+    { phase: 'PHASE 04', title: 'Portfolio & Earning Launch', desc: 'Craft professional developer portfolio, optimize LinkedIn/GitHub profiles, and begin client outreach.', deliverables: 'Professional Portfolio Website, Career Readiness Certificate' },
+  ],
+}
+
+const aiAutomationData: ServiceData = {
+  id: 6,
+  name: 'AI Automation',
+  slug: 'ai-automation',
+  tagline: 'Intelligent Process Automation & Workflow Efficiency',
+  short_description:
+    'Use AI-powered automation to streamline business processes, reduce repetitive tasks, improve productivity, and increase operational efficiency.',
+  description:
+    'Use AI-powered automation to streamline business processes, reduce repetitive tasks, improve productivity, and increase operational efficiency. We implement intelligent agents, automated document processors, and smart workflows that save hours of manual labor every week.',
+  icon: Brain,
+  color: '#f59e0b',
+  sla: 'Automated Efficiency',
+  deliveryTime: '4–8 Weeks Integration',
+  communication: 'Weekly Iteration Demos + Metric Dashboards',
+  stats: [
+    { label: 'Time Saved per Process', value: '70%+' },
+    { label: 'Processing Accuracy', value: '99.2%' },
+    { label: 'Automation Response', value: 'Instant' },
+    { label: 'Integrations Supported', value: '50+ Apps' },
+  ],
+  technologies: [
+    { name: 'Python', category: 'Core Language', color: '#3776ab' },
+    { name: 'OpenAI / Claude APIs', category: 'LLM Foundations', color: '#10a37f' },
+    { name: 'LangChain & LlamaIndex', category: 'AI Orchestration', color: '#1c3c3c' },
+    { name: 'pgvector / Qdrant', category: 'Vector Retrieval', color: '#00d4ff' },
+    { name: 'Zapier / n8n / Make', category: 'Workflow Pipelines', color: '#ff4f00' },
+    { name: 'FastAPI', category: 'API Serving', color: '#009688' },
+  ],
+  features: [
+    {
+      title: 'End-to-End Workflow Automation',
+      description: 'Connect disparate software tools to automate data transfer, alerts, customer updates, and filings.',
+      specs: ['Zero manual data entry', 'Trigger-based webhook pipelines', 'Automated error alerts and retries'],
+    },
+    {
+      title: 'Intelligent Document Extraction',
+      description: 'Extract structured data from unstructured invoices, PDFs, contracts, and customer forms automatically.',
+      specs: ['High-accuracy OCR parsing', 'Table and field extraction', 'Automated CRM & database sync'],
+    },
+    {
+      title: 'Customer & Internal AI Assistants',
+      description: 'Deploy domain-trained chatbots that answer support queries and retrieve internal knowledge instantly.',
+      specs: ['Grounding in your company data', 'Hallucination prevention guardrails', 'Seamless human escalation handoff'],
+    },
+    {
+      title: 'Operational Productivity Dashboards',
+      description: 'Track time saved, tasks completed, and cost efficiencies gained from automated processes in real time.',
+      specs: ['Live throughput metrics', 'Cost per task analytics', 'Audit logs for every automated action'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Workflow Audit & ROI Mapping', desc: 'Identify highest-leverage repetitive bottlenecks and define clear time-saving targets.', deliverables: 'Automation Feasibility Report, Process Map' },
+    { phase: 'PHASE 02', title: 'Data Pipeline & AI Prototype', desc: 'Set up connectors, test model extraction accuracy, and validate edge cases.', deliverables: 'Working Proof-of-Concept, Accuracy Benchmark' },
+    { phase: 'PHASE 03', title: 'Integration & Guardrail Tuning', desc: 'Integrate automated workflows into existing CRM, database, and communication tools.', deliverables: 'Automated Pipeline on Staging, Fallback Rules' },
+    { phase: 'PHASE 04', title: 'Production Rollout & Monitoring', desc: 'Deploy live automation, train internal team, and configure automated error monitoring.', deliverables: 'Production Automation Suite, Efficiency Dashboard' },
+  ],
+}
+
+const remoteDeveloperData: ServiceData = {
+  id: 7,
+  name: 'Remote Developer Hiring',
+  slug: 'remote-developer-hiring',
+  tagline: 'Vetted Dedicated Tech Talent & Team Augmentation',
+  short_description:
+    'Help businesses hire skilled remote developers according to their project requirements and technical needs.',
+  description:
+    'Help businesses hire skilled remote developers according to their project requirements and technical needs. Scale your tech team seamlessly with vetted, senior engineers proficient in modern web, mobile, backend, and DevOps technologies.',
+  icon: Users,
+  color: '#ec4899',
+  sla: 'Top 3% Vetted Talent',
+  deliveryTime: '1–2 Weeks Placement',
+  communication: 'Direct Slack, Jira & Daily Standups',
+  stats: [
+    { label: 'Vetting Acceptance Rate', value: 'Top 3%' },
+    { label: 'Onboarding Speed', value: '< 10 Days' },
+    { label: 'Developer Retention', value: '94%+' },
+    { label: 'Trial Period', value: '2-Week Risk Free' },
+  ],
+  technologies: [
+    { name: 'React / Next.js', category: 'Frontend', color: '#00d4ff' },
+    { name: 'Python / Django', category: 'Backend', color: '#0066ff' },
+    { name: 'Node.js / Express', category: 'Backend', color: '#339933' },
+    { name: 'Flutter & Mobile', category: 'Mobile Apps', color: '#02569b' },
+    { name: 'PostgreSQL / MySQL', category: 'Databases', color: '#336791' },
+    { name: 'Docker / Cloud', category: 'DevOps', color: '#2496ed' },
+  ],
+  features: [
+    {
+      title: 'Rigorous Technical & Soft Skill Vetting',
+      description: 'Every developer undergoes live coding assessments, system architecture interviews, and communication checks.',
+      specs: ['Live coding evaluation', 'System design interview', 'Fluent English communication verification'],
+    },
+    {
+      title: 'Seamless Tool & Culture Integration',
+      description: 'Engineers adapt directly into your GitHub, Jira, Slack, and daily sprint rhythm from Day 1.',
+      specs: ['Time zone overlap flexibility', 'Immediate repository access', 'Familiar with modern agile cadences'],
+    },
+    {
+      title: 'Flexible Team Augmentation Models',
+      description: 'Scale up or adjust your engineering capacity on-demand with part-time, full-time, or pod contracts.',
+      specs: ['Zero long-term lock-in', 'No recruitment overhead fees', 'Simple consolidated invoicing'],
+    },
+    {
+      title: 'Dedicated Account & Performance Support',
+      description: 'Continuous check-ins to ensure your developer meets expectations and delivers measurable sprint outputs.',
+      specs: ['Regular milestone check-ins', 'Replacement guarantee if not a fit', 'Continuous skill upskilling support'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Skill Profile & Stack Definition', desc: 'Understand your project tech stack, required seniority, time zone needs, and milestone goals.', deliverables: 'Candidate Profile Spec, Screening Criteria' },
+    { phase: 'PHASE 02', title: 'Shortlisting & Client Interviews', desc: 'Select from pre-screened senior engineers and conduct direct technical interviews.', deliverables: 'Curated Candidate Portfolios, Interview Schedules' },
+    { phase: 'PHASE 03', title: '2-Week Trial & Onboarding', desc: 'Integrate the selected engineer into your sprint cycle with a risk-free trial period.', deliverables: 'Repository Access, First Completed Sprint Tasks' },
+    { phase: 'PHASE 04', title: 'Dedicated Scaling & Milestones', desc: 'Long-term productive contribution with regular management check-ins and performance alignment.', deliverables: 'Continuous Feature Releases, Sprint Delivery' },
+  ],
+}
+
+const malwareData: ServiceData = {
+  id: 8,
+  name: 'Website Malware Detection & Removal',
+  slug: 'malware-detection-removal',
+  tagline: 'Comprehensive Web Security & Threat Cleanup',
+  short_description:
+    'Detect and remove malware, malicious code, suspicious files, redirects, and other security threats from compromised websites.',
+  description:
+    'Detect and remove malware, malicious code, suspicious files, redirects, and other security threats from compromised websites. We disinfect compromised websites, restore normal operation, patch vulnerabilities, and implement proactive defenses against recurring attacks.',
+  icon: ShieldAlert,
+  color: '#ef4444',
+  sla: 'Rapid Security Response',
+  deliveryTime: '24–48 Hours Disinfection',
+  communication: 'Direct Security Incident Updates',
+  stats: [
+    { label: 'Malware Removal Rate', value: '100% Clean' },
+    { label: 'Emergency Response', value: '< 2 Hours' },
+    { label: 'Blacklist Delisting', value: 'Google Verified' },
+    { label: 'Post-Clean Warranty', value: '30-Day Guarantee' },
+  ],
+  technologies: [
+    { name: 'PHP & WordPress', category: 'CMS Security', color: '#21759b' },
+    { name: 'Linux / Nginx / Apache', category: 'Server Hardening', color: '#f59e0b' },
+    { name: 'ClamAV / Maldet', category: 'Scanner Engines', color: '#ef4444' },
+    { name: 'Web Application Firewall', category: 'WAF Protection', color: '#0066ff' },
+    { name: 'SSL / TLS Certificates', category: 'Transport Crypto', color: '#10b981' },
+    { name: 'Google Search Console', category: 'Blacklist Removal', color: '#4285f4' },
+  ],
+  features: [
+    {
+      title: 'Deep File & Webshell Scanning',
+      description: 'Comprehensive static and behavioral scanning uncovering hidden backdoors, obfuscated eval scripts, and webshells.',
+      specs: ['Core file integrity verification', 'Signature & heuristic detection', 'Identification of unauthorized admin accounts'],
+    },
+    {
+      title: 'Malicious Redirect Elimination',
+      description: 'Clean .htaccess exploits, corrupt Nginx configs, and JavaScript hooks that redirect your visitors to malicious sites.',
+      specs: ['Search engine cloaking cleanup', 'SEO spam & pharma link removal', 'Mobile redirect eradication'],
+    },
+    {
+      title: 'Database & Cron Sanitization',
+      description: 'Scan SQL databases for injected scripts, base64 payloads, rogue scheduled cron jobs, and unauthorized users.',
+      specs: ['SQL payload neutralization', 'Elimination of rogue cron tasks', 'Secure database password rotation'],
+    },
+    {
+      title: 'Hardening & Blacklist Delisting',
+      description: 'Install hardened firewall rules, update security patches, and submit expedited review requests to Google Safe Browsing.',
+      specs: ['Google red warning screen removal', 'Web Application Firewall (WAF) deployment', 'File permission lockdown'],
+    },
+  ],
+  process: [
+    { phase: 'PHASE 01', title: 'Emergency Containment & Full Backup', desc: 'Isolate compromised files, create secure uncorrupted backups, and prevent further infection spread.', deliverables: 'Secure Offline Snapshot, Attack Vector Diagnosis' },
+    { phase: 'PHASE 02', title: 'Deep Disinfection & Code Cleanup', desc: 'Remove backdoors, infected scripts, malicious database rows, and restore clean core files.', deliverables: 'Cleaned Codebase, Clean Database Verification' },
+    { phase: 'PHASE 03', title: 'Vulnerability Patching & Hardening', desc: 'Patch underlying security holes, update vulnerable plugins, and configure active WAF rules.', deliverables: 'Hardened Server Configuration, Installed Firewall' },
+    { phase: 'PHASE 04', title: 'Blacklist Delisting & Handover', desc: 'Request reviews from Google Safe Browsing, verify clean status, and provide full security audit report.', deliverables: 'Google Delisting Approval, Prevention Audit Report' },
+  ],
+}
+
 const SERVICES_DATA: Record<string, ServiceData> = {
-  'custom-software': {
-    id: 1,
-    name: 'Custom Software Development',
-    slug: 'custom-software',
-    tagline: 'High-Concurrency Distributed Cloud & Enterprise Architectures',
-    short_description:
-      'We architect and engineer distributed cloud backends, resilient microservice fabrics, low-latency REST/GraphQL APIs, and mission-critical enterprise systems designed for horizontal scalability and zero downtime.',
-    description:
-      'Our dedicated software pods partner with forward-thinking enterprises and fast-scaling ventures. We replace legacy technical debt with modern cloud-native systems, event-driven streaming pipelines, and microservice meshes that power millions of mission-critical business transactions every single day.',
-    icon: Code2,
-    color: '#0066ff',
-    sla: '99.99% Availability SLA',
-    deliveryTime: '6–12 Weeks MVP',
-    communication: 'Daily Async Standups + Bi-Weekly Demos',
-    stats: [
-      { label: 'System Uptime SLA', value: '99.99%' },
-      { label: 'P99 Query Latency', value: '< 15ms' },
-      { label: 'Concurrent Throughput', value: '500K+ req/s' },
-      { label: 'Code Ownership', value: '100% Yours' },
-    ],
-    technologies: [
-      { name: 'TypeScript', category: 'Frontend/Node', color: '#3178c6' },
-      { name: 'React / Next.js', category: 'Frontend', color: '#00d4ff' },
-      { name: 'Python / Django', category: 'Backend', color: '#0066ff' },
-      { name: 'Go / Golang', category: 'High-Perf Backend', color: '#38bdf8' },
-      { name: 'PostgreSQL', category: 'Relational DB', color: '#336791' },
-      { name: 'Redis Cluster', category: 'In-Memory Cache', color: '#dc2626' },
-      { name: 'Kafka / RabbitMQ', category: 'Event Mesh', color: '#eab308' },
-      { name: 'Docker & Kubernetes', category: 'Container Infra', color: '#2496ed' },
-    ],
-    features: [
-      {
-        title: 'Event-Driven Microservices Fabric',
-        description:
-          'Distributed, decoupled service architectures communicating via high-throughput gRPC and Kafka event brokers for zero-loss message processing.',
-        specs: ['Decoupled fault domains', 'Sub-millisecond binary RPC', 'Automatic retry & dead-letter queue'],
-      },
-      {
-        title: 'Zero-Downtime Blue/Green Deployments',
-        description:
-          'Enterprise CI/CD automation with canary traffic routing, automated regression health checks, and instant rollback triggers on any failure.',
-        specs: ['Automated canary testing', 'Multi-region failover', '100% automated test coverage'],
-      },
-      {
-        title: 'Sub-Millisecond Query Optimization',
-        description:
-          'Custom relational schema modeling, distributed caching tiers, and indexing strategies that cut database CPU utilization and slash server costs.',
-        specs: ['Partitioned table architecture', 'Redis distributed read replicas', 'Automated connection pooling'],
-      },
-      {
-        title: 'Enterprise Zero-Trust & SOC2 Compliance',
-        description:
-          'End-to-end cryptographic transport encryption, role-based access control (RBAC), and tamper-proof audit trails meeting financial standards.',
-        specs: ['mTLS service communication', 'Column-level AES-256 encryption', 'Immutable audit telemetry'],
-      },
-    ],
-    process: [
-      {
-        phase: 'PHASE 01',
-        title: 'Discovery & Blueprinting',
-        desc: 'Deep requirements analysis, event modeling, API contracts, and complete cloud architecture diagrams.',
-        deliverables: 'Architecture RFC, Data Schema, Sprint Milestones',
-      },
-      {
-        phase: 'PHASE 02',
-        title: 'Foundation & Core API',
-        desc: 'Setting up the infrastructure as code, container scaffolding, database schemas, and baseline auth.',
-        deliverables: 'Staging Environment, CI/CD Pipeline, Core Endpoints',
-      },
-      {
-        phase: 'PHASE 03',
-        title: 'Sprint Cycles & Testing',
-        desc: 'Two-week agile sprints with bi-weekly live staging demos, integration tests, and stress benchmarks.',
-        deliverables: 'Working Feature Releases, Automated Test Suite',
-      },
-      {
-        phase: 'PHASE 04',
-        title: 'Hardening & Global Launch',
-        desc: 'Security penetration reviews, load simulation, production DNS switchover, and live observability handoff.',
-        deliverables: 'Production Deployment, Runbooks, 24/7 Monitoring',
-      },
-    ],
-  },
-  gaming: {
-    id: 2,
-    name: 'Arcade & Interactive Gaming Tech',
-    slug: 'gaming',
-    tagline: 'Embedded Arcade Operating Systems & Low-Latency Engines',
-    short_description:
-      'Engineered from the silicon up: custom embedded arcade operating systems, ultra-low-latency input controllers, multiplayer synchronization protocols, and high-frequency display engines with native hardware acceleration.',
-    description:
-      'Code Astro pioneers modern arcade hardware and commercial entertainment engineering. We design custom Linux firmware, FPGA interfaces, coin-drop telemetry daemons, and deterministic multiplayer netcode that delivers unforgettable interactive sensations with sub-4ms hardware input response.',
-    icon: Gamepad2,
-    color: '#00d4ff',
-    sla: 'Sub-4ms Input Latency',
-    deliveryTime: '8–16 Weeks Hardware/OS',
-    communication: 'Hardware Lab Staging Demos + Direct Slack',
-    stats: [
-      { label: 'Input Polling Latency', value: '< 3.8ms' },
-      { label: 'Target Framerate', value: '120+ FPS' },
-      { label: 'OS Boot Time', value: '< 4.2 sec' },
-      { label: 'Hardware Architecture', value: 'ARM & x86_64' },
-    ],
-    technologies: [
-      { name: 'C++20 / Rust', category: 'Engine Kernel', color: '#00d4ff' },
-      { name: 'Vulkan / OpenGL', category: 'GPU Pipeline', color: '#e11d48' },
-      { name: 'Embedded Linux / Yocto', category: 'Custom OS', color: '#f59e0b' },
-      { name: 'WebSockets / UDP Mesh', category: 'Lockstep Netcode', color: '#0066ff' },
-      { name: 'STM32 / ARM Cortex', category: 'Hardware Microcontroller', color: '#10b981' },
-      { name: 'MQTT / Telemetry', category: 'Telemetry Daemon', color: '#38bdf8' },
-    ],
-    features: [
-      {
-        title: 'Deterministic Sub-4ms Input Drivers',
-        description:
-          'Direct hardware register access and custom Linux kernel HID drivers bypassing standard OS buffers for immediate arcade response.',
-        specs: ['Zero-buffer interrupt polling', 'Anti-ghosting matrix decoder', 'Sub-4ms glass-to-glass latency'],
-      },
-      {
-        title: 'Lockstep Multiplayer Synchronization',
-        description:
-          'High-frequency UDP deterministic network state rollback engine ensuring arcade cabinets stay frame-perfect across physical venues.',
-        specs: ['Rollback netcode algorithms', 'Clock-drift auto-synchronization', 'Sub-20ms multi-machine pairing'],
-      },
-      {
-        title: 'Custom Embedded Linux Distribution',
-        description:
-          'Stripped-down, read-only flash OS image with watchdog timers that boots from cold power to full graphical gameplay in under 4 seconds.',
-        specs: ['Read-only root filesystem', 'Hardware watchdog protection', 'Instant AC power-cut resilience'],
-      },
-      {
-        title: 'Machine Telemetry & Coin-Drop Daemons',
-        description:
-          'Secure edge daemon capturing coin drops, ticket dispenser pulses, player session duration, and thermal metrics synced to the cloud.',
-        specs: ['Encrypted edge sync queue', 'Optical ticket sensor telemetry', 'Real-time revenue analytics dashboard'],
-      },
-    ],
-    process: [
-      {
-        phase: 'PHASE 01',
-        title: 'Hardware & Controller Spec',
-        desc: 'Reviewing physical cabinet form factors, I/O pinouts, display resolutions, and input controller latency goals.',
-        deliverables: 'Hardware Interface Blueprint, PCB Pinout Plan',
-      },
-      {
-        phase: 'PHASE 02',
-        title: 'Embedded OS & Kernel Build',
-        desc: 'Compiling stripped Yocto Linux kernel with custom GPU drivers and zero-bloat startup sequences.',
-        deliverables: 'Bootable Flash OS Image, Display Pipeline Driver',
-      },
-      {
-        phase: 'PHASE 03',
-        title: 'Engine & Gameplay Integration',
-        desc: 'Building gameplay mechanics, graphics rendering pipeline, sound engine, and coin-op state machine.',
-        deliverables: 'Playable Cabinet Build, Input Calibration Suite',
-      },
-      {
-        phase: 'PHASE 04',
-        title: 'Burn-In Stress Testing',
-        desc: 'Continuous 72-hour thermal stress test, power interruption cycles, and arcade floor certification.',
-        deliverables: 'Production Gold Master Image, Machine Telemetry API',
-      },
-    ],
-  },
-  automation: {
-    id: 3,
-    name: 'Industrial Automation & SCADA',
-    slug: 'automation',
-    tagline: 'Connected PLC Networks, Edge Daemons & Hardware IoT',
-    short_description:
-      'Mission-critical industrial software bridging physical factory hardware and cloud intelligence: PLC programming, SCADA telemetry dashboards, edge IoT gateway daemons, and automated sensor pipeline integration for modern manufacturing plants.',
-    description:
-      'We bring software engineering rigor to the factory floor. Our engineers build secure, fault-tolerant telemetry pipelines that communicate directly with industrial equipment over Modbus, CAN, Profinet, and OPC UA, piping high-frequency sensor readings into real-time monitoring canvases.',
-    icon: Cpu,
-    color: '#38bdf8',
-    sla: 'Fault-Tolerant Redundancy',
-    deliveryTime: '8–14 Weeks Commissioning',
-    communication: 'Weekly Milestone Reviews + On-Site Trials',
-    stats: [
-      { label: 'Sensor Polling Rate', value: '50ms High-Freq' },
-      { label: 'Hardware MTBF', value: '100,000+ Hrs' },
-      { label: 'Edge Failover Time', value: '< 200ms' },
-      { label: 'Industrial Standards', value: 'ISA-95 & IEC' },
-    ],
-    technologies: [
-      { name: 'Rust / C++', category: 'Edge Daemon', color: '#38bdf8' },
-      { name: 'Modbus / CAN-Bus', category: 'Fieldbus Protocol', color: '#f59e0b' },
-      { name: 'OPC UA / MQTT', category: 'SCADA Interop', color: '#10b981' },
-      { name: 'TimescaleDB', category: 'Time-Series DB', color: '#0066ff' },
-      { name: 'Docker / Balena', category: 'Edge Containerization', color: '#2496ed' },
-      { name: 'React / Canvas', category: 'SCADA Web HMI', color: '#00d4ff' },
-    ],
-    features: [
-      {
-        title: 'Multi-Protocol Industrial Bridges',
-        description:
-          'Universal protocol translators connecting Siemens, Allen-Bradley, and Omron PLCs into unified JSON/Protobuf telemetry streams.',
-        specs: ['Native Modbus TCP & RTU polling', 'Profinet & EtherNet/IP support', 'Zero-overhead packet deserialization'],
-      },
-      {
-        title: 'Real-Time SCADA Telemetry Canvas',
-        description:
-          'High-density vector web interface rendering factory topologies with thousands of active valves, pumps, and temperature sensors.',
-        specs: ['WebGL hardware-accelerated canvas', 'Sub-second audible alarm triggers', 'Historical trend playback overlay'],
-      },
-      {
-        title: 'Edge Predictive Anomaly Detection',
-        description:
-          'Embedded statistical and ML algorithms running on edge gateway hardware detecting motor vibration drift before physical failure.',
-        specs: ['Fast Fourier Transform (FFT) analysis', 'Vibration harmonic thresholds', 'Zero-cloud autonomous operation'],
-      },
-      {
-        title: 'Store-and-Forward Edge Buffering',
-        description:
-          'Local cryptographic SQLite ring buffers that preserve industrial telemetry uninterrupted during plant network or satellite blackouts.',
-        specs: ['Zero data loss during outages', 'Automatic cloud resync upon reconnect', 'End-to-end payload signature'],
-      },
-    ],
-    process: [
-      {
-        phase: 'PHASE 01',
-        title: 'Plant Audit & Protocol Survey',
-        desc: 'Reviewing physical wiring, PLC controller tags, baud rates, network topology, and safety interlocks.',
-        deliverables: 'Telemetry Mapping Document, Network Architecture',
-      },
-      {
-        phase: 'PHASE 02',
-        title: 'Edge Gateway Firmware Build',
-        desc: 'Deploying memory-safe polling daemons onto DIN-rail industrial PCs with hardware watchdog monitors.',
-        deliverables: 'Provisioned Edge Gateways, Fieldbus Polling Engine',
-      },
-      {
-        phase: 'PHASE 03',
-        title: 'SCADA Web HMI & Alarm Rules',
-        desc: 'Designing intuitive real-time web control panels with configurable warning thresholds and email/SMS alerts.',
-        deliverables: 'Interactive SCADA Dashboard, Alarm Escalation Engine',
-      },
-      {
-        phase: 'PHASE 04',
-        title: 'Commissioning & Plant Sign-off',
-        desc: 'On-site verification, failover simulation, electrical isolation testing, and operator team training.',
-        deliverables: 'Final Commissioning Certification, Plant Runbook',
-      },
-    ],
-  },
-  'ai-cloud': {
-    id: 4,
-    name: 'AI & Cloud Infrastructure',
-    slug: 'ai-cloud',
-    tagline: 'Autonomous Intelligence, Vector Search & Multi-Region Mesh',
-    short_description:
-      'Production-grade AI engineering and cloud platforms: custom retrieval-augmented generation (RAG) pipelines, high-throughput model inference servers, multi-region Kubernetes clusters, and automated Terraform infrastructure.',
-    description:
-      'We engineer enterprise-ready AI backends that solve real business problems without hallucinations or runaway cloud bills. From fine-tuned local LLM deployments to multi-region Kubernetes clusters running automated GitOps pipelines, we turn cutting-edge AI research into battle-tested production software.',
-    icon: Globe,
-    color: '#60a5fa',
-    sla: '99.99% Cloud Availability',
-    deliveryTime: '6–10 Weeks Deployment',
-    communication: 'Daily GitOps Telemetry + Sprint Pod Calls',
-    stats: [
-      { label: 'Inference Latency', value: '< 45ms TTFT' },
-      { label: 'Vector Query Rate', value: '50K+ QPS' },
-      { label: 'IaC Infrastructure', value: '100% Terraform' },
-      { label: 'Global Availability', value: 'Multi-Region' },
-    ],
-    technologies: [
-      { name: 'Python / PyTorch', category: 'AI Inference', color: '#e11d48' },
-      { name: 'pgvector / Qdrant', category: 'Vector DB', color: '#00d4ff' },
-      { name: 'Kubernetes (K8s)', category: 'Cloud Orchestration', color: '#38bdf8' },
-      { name: 'Terraform / OpenTofu', category: 'IaC Automation', color: '#60a5fa' },
-      { name: 'vLLM / TensorRT', category: 'Model Serving', color: '#10b981' },
-      { name: 'Kafka / Streaming', category: 'Event Telemetry', color: '#f59e0b' },
-    ],
-    features: [
-      {
-        title: 'Enterprise RAG & Semantic Retrieval',
-        description:
-          'Hybrid dense-sparse vector search pipelines with cross-encoder rerankers delivering millisecond-accurate document intelligence.',
-        specs: ['Sub-30ms vector search latency', 'Zero data leakage guarantee', 'Dynamic contextual compression'],
-      },
-      {
-        title: 'High-Throughput Model Serving',
-        description:
-          'Self-hosted inference clusters utilizing vLLM and continuous batching to maximize GPU saturation and minimize token latency.',
-        specs: ['Continuous token batching', 'FP8 / AWQ weight quantization', 'Sub-45ms time-to-first-token'],
-      },
-      {
-        title: 'Multi-Region Kubernetes Meshes',
-        description:
-          'Global container clusters with automated geo-DNS routing, automated horizontal pod autoscaling, and self-healing nodes.',
-        specs: ['Automated zero-downtime rollouts', 'Sub-second traffic failover', 'Automated cluster autoscaling'],
-      },
-      {
-        title: 'Declarative GitOps & Terraform IaC',
-        description:
-          '100% reproducible cloud topologies configured as code with automated security vulnerability scanning and drift detection.',
-        specs: ['Automated CI/CD validation plans', 'Zero manual cloud console clicks', 'Automated backup snapshots'],
-      },
-    ],
-    process: [
-      {
-        phase: 'PHASE 01',
-        title: 'AI Feasibility & Data Pipeline',
-        desc: 'Analyzing data ingestion sources, embedding chunking strategies, and benchmarking foundational model candidates.',
-        deliverables: 'Model Benchmark Report, Vector Strategy RFC',
-      },
-      {
-        phase: 'PHASE 02',
-        title: 'Cloud Topology & IaC Provisioning',
-        desc: 'Writing Terraform scripts to provision secure VPCs, GPU worker nodes, vector storage, and IAM roles.',
-        deliverables: 'Automated Terraform Scripts, Staging Cluster',
-      },
-      {
-        phase: 'PHASE 03',
-        title: 'RAG Pipeline & Inference Optimization',
-        desc: 'Deploying high-throughput serving engines, embedding indexes, and evaluation benchmarks for factual accuracy.',
-        deliverables: 'Production Inference API, Retrieval Benchmark Suite',
-      },
-      {
-        phase: 'PHASE 04',
-        title: 'Observability & SLA Handover',
-        desc: 'Configuring Prometheus metrics, Grafana dashboards, token cost monitors, and 24/7 on-call alerting.',
-        deliverables: 'Production Observability Dashboard, SLA Guarantee',
-      },
-    ],
-  },
+  'custom-software-development': customSoftwareData,
+  'custom-software': customSoftwareData,
+  'mobile-app-development': mobileAppData,
+  'mobile': mobileAppData,
+  'ecommerce-solutions': ecommerceData,
+  'web-development': webDevData,
+  'training-earning': trainingData,
+  'ai-automation': aiAutomationData,
+  'ai-cloud': aiAutomationData,
+  'ai-ml': aiAutomationData,
+  'remote-developer-hiring': remoteDeveloperData,
+  'malware-detection-removal': malwareData,
 }
 
 export default function ServiceDetailPage() {

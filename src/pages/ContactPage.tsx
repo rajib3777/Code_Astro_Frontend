@@ -5,12 +5,14 @@ import { getSiteSettings, submitContact } from '@/api'
 import { Send, Mail, Phone, MapPin, CheckCircle, ArrowRight, MessageSquare, Zap, Clock, ShieldCheck } from 'lucide-react'
 
 const PROJECT_TYPES = [
-  'Custom Software',
-  'Arcade & Gaming',
-  'SCADA & Automation',
-  'AI / ML Platform',
-  'Mobile Application',
-  'Cloud Architecture',
+  'Custom Software Development',
+  'Mobile App Development',
+  'E-commerce Solutions',
+  'Web Development',
+  'Training & Earning',
+  'AI Automation',
+  'Remote Developer Hiring',
+  'Website Malware Detection & Removal',
 ]
 
 const BUDGET_RANGES = [

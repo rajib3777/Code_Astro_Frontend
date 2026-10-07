@@ -1,6 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Layers, Shield, Terminal, CheckCircle2, ExternalLink, Activity, Cpu, Globe } from 'lucide-react'
+import {
+  ArrowRight,
+  Layers,
+  Shield,
+  Terminal,
+  CheckCircle2,
+  ExternalLink,
+  Activity,
+  Cpu,
+  Globe,
+  Users,
+  BookOpen,
+  DollarSign,
+  FileText,
+  Monitor,
+  Factory,
+  GraduationCap,
+  Eye,
+  Sparkles,
+  Building2,
+  CreditCard,
+  Brain,
+} from 'lucide-react'
 
 const SECTION_HEADER: React.CSSProperties = {
   textAlign: 'center',
@@ -54,117 +76,294 @@ const SECTION_SUBTITLE: React.CSSProperties = {
 
 // Product visual mockup images (SVG data URIs for real visual)
 const PRODUCT_VISUALS = [
-  // Forge Analytics — dashboard screenshot mockup
+  // 1. Astro HR
   `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="400" height="220" rx="12" fill="#020818"/>
     <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
-    <circle cx="36" cy="32" r="6" fill="#ef4444"/>
-    <circle cx="54" cy="32" r="6" fill="#eab308"/>
-    <circle cx="72" cy="32" r="6" fill="#10b981"/>
-    <text x="100" y="37" fill="#334155" font-size="11" font-family="monospace">forge-analytics v2.8 // live</text>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#38bdf8" font-size="11" font-family="monospace">astro-hr v3.4 // enterprise</text>
     <rect x="16" y="60" width="112" height="60" rx="8" fill="#0a1228" stroke="#0066ff22"/>
-    <text x="28" y="82" fill="#38bdf8" font-size="9" font-family="monospace">QUERIES/SEC</text>
-    <text x="28" y="104" fill="#0066ff" font-size="22" font-weight="800" font-family="sans-serif">1.2B</text>
+    <text x="28" y="82" fill="#38bdf8" font-size="9" font-family="monospace">ACTIVE EMPLOYEES</text>
+    <text x="28" y="104" fill="#0066ff" font-size="22" font-weight="800" font-family="sans-serif">14,200</text>
     <rect x="140" y="60" width="112" height="60" rx="8" fill="#0a1228" stroke="#00d4ff22"/>
-    <text x="152" y="82" fill="#38bdf8" font-size="9" font-family="monospace">LATENCY</text>
-    <text x="152" y="104" fill="#00d4ff" font-size="22" font-weight="800" font-family="sans-serif">8ms</text>
+    <text x="152" y="82" fill="#38bdf8" font-size="9" font-family="monospace">ON-TIME PAYROLL</text>
+    <text x="152" y="104" fill="#00d4ff" font-size="22" font-weight="800" font-family="sans-serif">100%</text>
     <rect x="264" y="60" width="120" height="60" rx="8" fill="#0a1228" stroke="#10b98122"/>
-    <text x="276" y="82" fill="#38bdf8" font-size="9" font-family="monospace">UPTIME</text>
-    <text x="276" y="104" fill="#10b981" font-size="22" font-weight="800" font-family="sans-serif">99.99%</text>
+    <text x="276" y="82" fill="#38bdf8" font-size="9" font-family="monospace">ATTENDANCE</text>
+    <text x="276" y="104" fill="#10b981" font-size="22" font-weight="800" font-family="sans-serif">99.4%</text>
     <rect x="16" y="132" width="368" height="72" rx="8" fill="#0a1228" stroke="#0066ff15"/>
-    <text x="28" y="152" fill="#334155" font-size="9" font-family="monospace">REAL-TIME STREAM</text>
+    <text x="28" y="152" fill="#334155" font-size="9" font-family="monospace">STAFF PRODUCTIVITY TREND</text>
+    <polyline points="28,190 70,175 112,180 154,160 196,168 238,150 280,155 322,142 364,148" stroke="#0066ff" stroke-width="2" fill="none"/>
+    <polyline points="28,195 70,188 112,185 154,178 196,182 238,172 280,174 322,165 364,168" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  </svg>`)}`,
+
+  // 2. Hikmah Soft
+  `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="220" rx="12" fill="#020818"/>
+    <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#10b981" font-size="11" font-family="monospace">hikmah-soft // shariah-erp</text>
+    <rect x="16" y="60" width="180" height="144" rx="10" fill="#0a1228" stroke="#10b98122"/>
+    <text x="28" y="82" fill="#10b981" font-size="10" font-family="monospace" font-weight="800">ISLAMIC LEDGER</text>
+    <circle cx="108" cy="130" r="28" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4 2"/>
+    <circle cx="108" cy="130" r="18" fill="#10b98122"/>
+    <text x="96" y="134" fill="#34d399" font-size="14" font-weight="800" font-family="sans-serif">✓</text>
+    <text x="74" y="174" fill="#64748b" font-size="9" font-family="monospace">SHARIAH AUDITED</text>
+    <rect x="208" y="60" width="176" height="64" rx="8" fill="#0a1228" stroke="#10b98122"/>
+    <text x="220" y="80" fill="#38bdf8" font-size="9" font-family="monospace">ZAKAT & WAQF</text>
+    <text x="220" y="104" fill="#10b981" font-size="24" font-weight="800" font-family="sans-serif">Auto-Calc</text>
+    <rect x="208" y="136" width="176" height="64" rx="8" fill="#0a1228" stroke="#0066ff22"/>
+    <text x="220" y="156" fill="#38bdf8" font-size="9" font-family="monospace">MURABAHA ACCOUNTS</text>
+    <text x="220" y="180" fill="#0066ff" font-size="24" font-weight="800" font-family="sans-serif">99.98%</text>
+  </svg>`)}`,
+
+  // 3. FinCore360
+  `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="220" rx="12" fill="#020818"/>
+    <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#38bdf8" font-size="11" font-family="monospace">fincore360 // banking-engine</text>
+    <rect x="16" y="60" width="112" height="60" rx="8" fill="#0a1228" stroke="#0066ff22"/>
+    <text x="28" y="82" fill="#38bdf8" font-size="9" font-family="monospace">DAILY VOLUME</text>
+    <text x="28" y="104" fill="#0066ff" font-size="22" font-weight="800" font-family="sans-serif">$24M+</text>
+    <rect x="140" y="60" width="112" height="60" rx="8" fill="#0a1228" stroke="#00d4ff22"/>
+    <text x="152" y="82" fill="#38bdf8" font-size="9" font-family="monospace">SETTLEMENT</text>
+    <text x="152" y="104" fill="#00d4ff" font-size="22" font-weight="800" font-family="sans-serif">&lt;100ms</text>
+    <rect x="264" y="60" width="120" height="60" rx="8" fill="#0a1228" stroke="#10b98122"/>
+    <text x="276" y="82" fill="#38bdf8" font-size="9" font-family="monospace">LEDGER UPTIME</text>
+    <text x="276" y="104" fill="#10b981" font-size="22" font-weight="800" font-family="sans-serif">99.999%</text>
+    <rect x="16" y="132" width="368" height="72" rx="8" fill="#0a1228" stroke="#0066ff15"/>
+    <text x="28" y="152" fill="#334155" font-size="9" font-family="monospace">TRANSACTION PIPELINE</text>
     <polyline points="28,190 70,170 112,180 154,155 196,165 238,148 280,158 322,140 364,150" stroke="#0066ff" stroke-width="2" fill="none"/>
     <polyline points="28,195 70,185 112,190 154,175 196,180 238,170 280,175 322,160 364,168" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.5"/>
   </svg>`)}`,
 
-  // VaultAuth — security dashboard
+  // 4. Quotation Pro
   `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="400" height="220" rx="12" fill="#020818"/>
     <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
-    <circle cx="36" cy="32" r="6" fill="#ef4444"/>
-    <circle cx="54" cy="32" r="6" fill="#eab308"/>
-    <circle cx="72" cy="32" r="6" fill="#10b981"/>
-    <text x="100" y="37" fill="#334155" font-size="11" font-family="monospace">vaultauth v3.2 // zero-trust-iam</text>
-    <rect x="16" y="60" width="180" height="144" rx="10" fill="#0a1228" stroke="#00d4ff22"/>
-    <text x="28" y="82" fill="#00d4ff" font-size="10" font-family="monospace" font-weight="800">IDENTITY GRAPH</text>
-    <circle cx="108" cy="130" r="28" fill="none" stroke="#0066ff" stroke-width="2" stroke-dasharray="4 2"/>
-    <circle cx="108" cy="130" r="18" fill="#0066ff22"/>
-    <text x="96" y="134" fill="#00d4ff" font-size="14" font-weight="800" font-family="sans-serif">✓</text>
-    <text x="84" y="174" fill="#64748b" font-size="9" font-family="monospace">FIDO2 VERIFIED</text>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#6366f1" font-size="11" font-family="monospace">quotation-pro // cpq-billing</text>
+    <rect x="16" y="60" width="176" height="64" rx="8" fill="#0a1228" stroke="#6366f122"/>
+    <text x="28" y="80" fill="#a5b4fc" font-size="9" font-family="monospace">PROPOSALS CREATED</text>
+    <text x="28" y="104" fill="#6366f1" font-size="24" font-weight="800" font-family="sans-serif">120K+</text>
     <rect x="208" y="60" width="176" height="64" rx="8" fill="#0a1228" stroke="#10b98122"/>
-    <text x="220" y="80" fill="#38bdf8" font-size="9" font-family="monospace">SOC-2 AUDIT</text>
-    <text x="220" y="104" fill="#10b981" font-size="26" font-weight="800" font-family="sans-serif">100%</text>
-    <rect x="208" y="136" width="176" height="64" rx="8" fill="#0a1228" stroke="#0066ff22"/>
-    <text x="220" y="156" fill="#38bdf8" font-size="9" font-family="monospace">ACTIVE SESSIONS</text>
-    <text x="220" y="180" fill="#0066ff" font-size="26" font-weight="800" font-family="sans-serif">84,291</text>
+    <text x="220" y="80" fill="#38bdf8" font-size="9" font-family="monospace">ACCEPTANCE RATE</text>
+    <text x="220" y="104" fill="#10b981" font-size="24" font-weight="800" font-family="sans-serif">84%</text>
+    <rect x="16" y="136" width="368" height="68" rx="8" fill="#0a1228" stroke="#6366f115"/>
+    <text x="28" y="156" fill="#64748b" font-size="9" font-family="monospace">REAL-TIME ESTIMATION ENGINE</text>
+    <polyline points="28,190 80,180 140,170 200,162 260,155 320,148 368,142" stroke="#6366f1" stroke-width="2" fill="none"/>
   </svg>`)}`,
 
-  // PulseFlow — IoT telemetry
+  // 5. Remote Desk
   `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="400" height="220" rx="12" fill="#020818"/>
     <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
-    <circle cx="36" cy="32" r="6" fill="#ef4444"/>
-    <circle cx="54" cy="32" r="6" fill="#eab308"/>
-    <circle cx="72" cy="32" r="6" fill="#10b981"/>
-    <text x="100" y="37" fill="#334155" font-size="11" font-family="monospace">pulseflow v1.9 // iot-mesh</text>
-    <rect x="16" y="60" width="368" height="44" rx="8" fill="#0a1228" stroke="#38bdf822"/>
-    <text x="28" y="80" fill="#38bdf8" font-size="9" font-family="monospace">SENSOR TELEMETRY — 50,000+ ACTIVE NODES</text>
-    <polyline points="16,196 50,185 84,192 118,172 152,180 186,162 220,168 254,150 288,158 322,140 356,148 384,136" stroke="#38bdf8" stroke-width="2" fill="none"/>
-    <circle cx="254" cy="150" r="4" fill="#38bdf8"/>
-    <line x1="254" y1="150" x2="254" y2="116" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3 2"/>
-    <rect x="228" y="96" width="80" height="24" rx="6" fill="#0a1228" stroke="#38bdf822"/>
-    <text x="238" y="112" fill="#38bdf8" font-size="9" font-family="monospace">0.8ms spike</text>
-    <rect x="16" y="116" width="84" height="48" rx="8" fill="#0a1228" stroke="#0066ff22"/>
-    <text x="28" y="136" fill="#64748b" font-size="8" font-family="monospace">NODES LIVE</text>
-    <text x="28" y="154" fill="#0066ff" font-size="18" font-weight="800" font-family="sans-serif">50K+</text>
-    <rect x="116" y="116" width="84" height="48" rx="8" fill="#0a1228" stroke="#00d4ff22"/>
-    <text x="128" y="136" fill="#64748b" font-size="8" font-family="monospace">SAMPLING</text>
-    <text x="128" y="154" fill="#00d4ff" font-size="18" font-weight="800" font-family="sans-serif">1ms</text>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#38bdf8" font-size="11" font-family="monospace">remote-desk // zero-trust-vdi</text>
+    <rect x="16" y="60" width="180" height="144" rx="10" fill="#0a1228" stroke="#00d4ff22"/>
+    <text x="28" y="82" fill="#00d4ff" font-size="10" font-family="monospace" font-weight="800">WORKSPACE MESH</text>
+    <circle cx="108" cy="130" r="28" fill="none" stroke="#0066ff" stroke-width="2" stroke-dasharray="4 2"/>
+    <circle cx="108" cy="130" r="18" fill="#0066ff22"/>
+    <text x="96" y="134" fill="#00d4ff" font-size="14" font-weight="800" font-family="sans-serif">⚡</text>
+    <text x="76" y="174" fill="#64748b" font-size="9" font-family="monospace">SECURE ENCLAVE</text>
+    <rect x="208" y="60" width="176" height="64" rx="8" fill="#0a1228" stroke="#10b98122"/>
+    <text x="220" y="80" fill="#38bdf8" font-size="9" font-family="monospace">STREAM LATENCY</text>
+    <text x="220" y="104" fill="#10b981" font-size="24" font-weight="800" font-family="sans-serif">&lt;15ms</text>
+    <rect x="208" y="136" width="176" height="64" rx="8" fill="#0a1228" stroke="#0066ff22"/>
+    <text x="220" y="156" fill="#38bdf8" font-size="9" font-family="monospace">ACTIVE DESKTOPS</text>
+    <text x="220" y="180" fill="#0066ff" font-size="24" font-weight="800" font-family="sans-serif">8,450</text>
+  </svg>`)}`,
+
+  // 6. Industrial Edge
+  `data:image/svg+xml,${encodeURIComponent(`<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="220" rx="12" fill="#020818"/>
+    <rect x="16" y="16" width="368" height="32" rx="8" fill="#0a1228"/>
+    <circle cx="36" cy="32" r="6" fill="#ef4444"/><circle cx="54" cy="32" r="6" fill="#eab308"/><circle cx="72" cy="32" r="6" fill="#10b981"/>
+    <text x="100" y="37" fill="#f59e0b" font-size="11" font-family="monospace">industrial-edge // scada-iot</text>
+    <rect x="16" y="60" width="368" height="44" rx="8" fill="#0a1228" stroke="#f59e0b22"/>
+    <text x="28" y="80" fill="#f59e0b" font-size="9" font-family="monospace">SENSOR TELEMETRY — 50,000+ FACTORY SENSORS</text>
+    <polyline points="16,196 50,185 84,192 118,172 152,180 186,162 220,168 254,150 288,158 322,140 356,148 384,136" stroke="#f59e0b" stroke-width="2" fill="none"/>
+    <rect x="16" y="116" width="112" height="48" rx="8" fill="#0a1228" stroke="#f59e0b22"/>
+    <text x="28" y="136" fill="#64748b" font-size="8" font-family="monospace">NODES ACTIVE</text>
+    <text x="28" y="154" fill="#f59e0b" font-size="18" font-weight="800" font-family="sans-serif">50K+</text>
+    <rect x="144" y="116" width="112" height="48" rx="8" fill="#0a1228" stroke="#00d4ff22"/>
+    <text x="156" y="136" fill="#64748b" font-size="8" font-family="monospace">POLLING RATE</text>
+    <text x="156" y="154" fill="#00d4ff" font-size="18" font-weight="800" font-family="sans-serif">1ms</text>
+    <rect x="272" y="116" width="112" height="48" rx="8" fill="#0a1228" stroke="#10b98122"/>
+    <text x="284" y="136" fill="#64748b" font-size="8" font-family="monospace">DATA PACKETS</text>
+    <text x="284" y="154" fill="#10b981" font-size="18" font-weight="800" font-family="sans-serif">100M+</text>
   </svg>`)}`,
 ]
 
 const FALLBACK_PRODUCTS = [
   {
     id: 1,
-    name: 'Forge Analytics',
-    slug: 'forge-analytics',
-    tagline: 'Real-Time Edge Intelligence Engine',
-    short_description: 'Sub-second query engine across petabytes of streaming IoT and application telemetry with autonomous anomaly detection and instant root-cause tracing.',
-    category: 'Telemetry SaaS',
-    status: 'v2.8 Live',
+    name: 'Astro HR',
+    slug: 'astro-hr',
+    tagline: 'Modern Enterprise HR & Payroll Automation',
+    short_description: 'Comprehensive human resource management system featuring employee lifecycle tracking, automated payroll, biometric attendance, and leave management.',
+    category: 'HR Tech',
+    status: 'v3.4 Live',
     color: '#0066ff',
-    icon: Layers,
-    features: ['Sub-10ms query latency across billion-row sets', 'Automated ML anomaly detection', 'Self-serve GraphQL & REST streaming APIs'],
-    statVal: '1.2B',
-    statLabel: 'Events Processed Daily',
+    icon: Users,
+    features: ['Automated multi-tier payroll & tax computations', 'Biometric & geofenced mobile attendance tracking', 'Employee self-service & leave approval workflows'],
+    statVal: '14,000+',
+    statLabel: 'Employees Managed Daily',
   },
   {
     id: 2,
-    name: 'VaultAuth Zero-Trust',
-    slug: 'vault-auth',
-    tagline: 'Cryptographic Identity & Access Management',
-    short_description: 'SAML 2.0 + OIDC IAM platform featuring hardware biometric WebAuthn FIDO2, automated SCIM directory syncing, and instant SOC-2 compliance enforcement.',
-    category: 'Enterprise Security',
-    status: 'v3.2 Live',
-    color: '#00d4ff',
-    icon: Shield,
-    features: ['Hardware FIDO2 & WebAuthn biometrics', 'Automated SCIM directory provisioning', 'Zero-knowledge end-to-end payload cryptography'],
+    name: 'Hikmah Soft',
+    slug: 'hikmah-soft',
+    tagline: 'Shariah-Compliant Enterprise ERP & Financials',
+    short_description: 'Specialized enterprise resource planning software tailored for Islamic financial institutions, educational trusts, and commercial organizations.',
+    category: 'Islamic FinTech',
+    status: 'v2.6 Live',
+    color: '#10b981',
+    icon: BookOpen,
+    features: ['Shariah-compliant Murabaha & Mudaraba accounting', 'Automated Zakat calculation and disbursement tracking', 'Multi-branch audit-ready general ledger'],
     statVal: '100%',
-    statLabel: 'SOC-2 Audit Pass Rate',
+    statLabel: 'Shariah Compliance Verified',
   },
   {
     id: 3,
-    name: 'PulseFlow Engine',
-    slug: 'pulseflow-engine',
-    tagline: 'Low-Latency Industrial IoT Telemetry Core',
-    short_description: 'Ultra-compact, low-power embedded software daemon engineered for mission-critical industrial microcontrollers, SCADA networks, and arcade telemetry.',
-    category: 'Embedded Core',
-    status: 'v1.9 Live',
+    name: 'FinCore360',
+    slug: 'fincore360',
+    tagline: 'High-Throughput Core Banking & Financial Platform',
+    short_description: 'Scalable financial transaction and ledger management platform engineered for modern financial institutions, cooperatives, and fintech companies.',
+    category: 'FinTech Platform',
+    status: 'v4.1 Live',
+    color: '#00d4ff',
+    icon: DollarSign,
+    features: ['Real-time double-entry transaction processing', 'Granular multi-currency account management', 'Automated regulatory reporting and anti-fraud filters'],
+    statVal: '$24M+',
+    statLabel: 'Daily Transactions Processed',
+  },
+  {
+    id: 4,
+    name: 'Quotation Pro',
+    slug: 'quotation-pro',
+    tagline: 'Smart CPQ & Proposal Generation Engine',
+    short_description: 'Streamlined quotation, estimation, and billing software designed for sales teams, contractors, and agencies to close deals faster.',
+    category: 'Business SaaS',
+    status: 'v2.2 Live',
+    color: '#6366f1',
+    icon: FileText,
+    features: ['Dynamic pricing models with tiered tax/discount calculations', 'One-click client approval & digital signature collection', 'Seamless conversion from quote to invoice'],
+    statVal: '120,000+',
+    statLabel: 'Proposals Generated',
+  },
+  {
+    id: 5,
+    name: 'Remote Desk',
+    slug: 'remote-desk',
+    tagline: 'Secure Virtual Desktop & Distributed Workspace',
+    short_description: 'High-performance remote desktop infrastructure and virtual workstation management suite designed for distributed teams and engineering centers.',
+    category: 'Workplace Tech',
+    status: 'v3.0 Live',
     color: '#38bdf8',
-    icon: Terminal,
-    features: ['Native CAN-bus, Modbus & MQTT drivers', 'Sub-millisecond hardware sensor sampling', 'Cryptographic Over-the-Air firmware updates'],
+    icon: Monitor,
+    features: ['Low-latency encrypted screen streaming', 'Zero-trust device authentication and role policies', 'Centralized session monitoring and access auditing'],
+    statVal: '<15ms',
+    statLabel: 'Stream Latency',
+  },
+  {
+    id: 6,
+    name: 'Industrial Edge',
+    slug: 'industrial-edge',
+    tagline: 'Industrial IoT Telemetry & SCADA Gateway',
+    short_description: 'Ruggedized edge telemetry daemon aggregating real-time sensor streams, machine health telemetry, and automated industrial PLC control.',
+    category: 'IoT & Telemetry',
+    status: 'v2.5 Live',
+    color: '#f59e0b',
+    icon: Factory,
+    features: ['Native Modbus TCP/RTU, CAN-bus & MQTT protocols', 'Local store-and-forward flash buffer resilience', 'Sub-millisecond machine telemetry ingestion'],
     statVal: '50,000+',
-    statLabel: 'Active Hardware Nodes',
+    statLabel: 'Active Hardware Sensors',
+  },
+  {
+    id: 7,
+    name: 'eProshno',
+    slug: 'eproshno',
+    tagline: 'Smart Examination & Question Paper Management',
+    short_description: 'Modern digital examination and academic assessment portal with automated question banking, proctoring controls, and instant evaluation.',
+    category: 'EdTech',
+    status: 'v1.9 Live',
+    color: '#8b5cf6',
+    icon: GraduationCap,
+    features: ['Intelligent algorithmic question paper generation', 'Anti-cheat AI proctoring and browser sandboxing', 'Instant grading with granular competency analytics'],
+    statVal: '500,000+',
+    statLabel: 'Exams Conducted',
+  },
+  {
+    id: 8,
+    name: 'Staff Sight',
+    slug: 'staff-sight',
+    tagline: 'Workforce Productivity & Activity Analytics',
+    short_description: 'Intelligent workforce tracking platform providing transparent productivity analytics, timesheets, and project resource allocation insights.',
+    category: 'Analytics SaaS',
+    status: 'v2.1 Live',
+    color: '#ec4899',
+    icon: Eye,
+    features: ['Automated project timesheet tracking', 'Application and productivity distribution analytics', 'Transparent work logs with enterprise privacy safeguards'],
+    statVal: '99.8%',
+    statLabel: 'Reporting Accuracy',
+  },
+  {
+    id: 9,
+    name: 'Digital Astro',
+    slug: 'digital-astro',
+    tagline: 'Enterprise Digital Transformation Suite',
+    short_description: 'End-to-end digital operations portal empowering businesses to orchestrate workflows, manage customer portals, and digitize paper processes.',
+    category: 'Enterprise SaaS',
+    status: 'v3.5 Live',
+    color: '#06b6d4',
+    icon: Sparkles,
+    features: ['Visual no-code business process automation builder', 'Customer self-service portal and document repository', 'Unified REST and webhook integration framework'],
+    statVal: '300+',
+    statLabel: 'Enterprise Deployments',
+  },
+  {
+    id: 10,
+    name: 'Hotel Management System',
+    slug: 'hotel-management-system',
+    tagline: 'All-in-One Hospitality PMS & Reservation Core',
+    short_description: 'Comprehensive property management software for hotels and resorts, unifying reservations, front-desk check-ins, billing, and housekeeping.',
+    category: 'Hospitality Tech',
+    status: 'v2.8 Live',
+    color: '#14b8a6',
+    icon: Building2,
+    features: ['Real-time room inventory and channel manager sync', 'Express contactless mobile check-in & digital billing', 'Housekeeping task management and minibar POS tracking'],
+    statVal: '98.5%',
+    statLabel: 'Occupancy Tracking Rate',
+  },
+  {
+    id: 11,
+    name: 'Microcredit Management System',
+    slug: 'microcredit-management-system',
+    tagline: 'Microfinance & Loan Disbursement Platform',
+    short_description: 'Reliable financial software engineered for microfinance institutions, NGO credit programs, and cooperative societies with automated field collections.',
+    category: 'Microfinance Tech',
+    status: 'v3.2 Live',
+    color: '#3b82f6',
+    icon: CreditCard,
+    features: ['Flexible loan product design and automated repayment schedules', 'Offline-capable mobile field agent collection syncing', 'Comprehensive default risk scoring and portfolio audits'],
+    statVal: '$18M+',
+    statLabel: 'Loans Disbursed & Managed',
+  },
+  {
+    id: 12,
+    name: 'digimind.live',
+    slug: 'digimind-live',
+    tagline: 'AI-Powered Mental Wellness & Cognitive Support',
+    short_description: 'Next-generation AI cognitive health platform providing personalized support, mindfulness guidance, and real-time behavioral insights.',
+    category: 'HealthTech & AI',
+    status: 'v1.5 Live',
+    color: '#84cc16',
+    icon: Brain,
+    features: ['Conversational AI trained for evidence-based cognitive support', 'End-to-end encrypted private session logs', 'Longitudinal mood and emotional resilience analytics'],
+    statVal: '25,000+',
+    statLabel: 'Active Platform Users',
   },
 ]
 
@@ -214,7 +413,7 @@ export default function ProductsSection({ products }: { products?: any[] }) {
           gap: 24,
         }}>
           {items.map((prod: any, idx: number) => {
-            const fb = FALLBACK_PRODUCTS[idx % FALLBACK_PRODUCTS.length]
+            const fb = FALLBACK_PRODUCTS.find(f => f.slug === prod.slug || f.name?.toLowerCase() === prod.name?.toLowerCase()) || FALLBACK_PRODUCTS[idx % FALLBACK_PRODUCTS.length]
             const name = prod.name || fb.name
             const tagline = prod.tagline || fb.tagline
             const desc = prod.short_description || prod.description || fb.short_description

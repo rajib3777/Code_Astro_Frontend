@@ -361,10 +361,13 @@ export default function ContactSection({ settings }: { settings?: SiteSettings }
                       }}
                     >
                       <option value="Custom Software Development">Custom Software Development</option>
-                      <option value="Arcade & Gaming Systems">Arcade & Gaming Systems</option>
-                      <option value="Industrial Automation & SCADA">Industrial Automation & SCADA</option>
-                      <option value="Cloud Topology & DevOps">Cloud Topology & DevOps</option>
-                      <option value="Proprietary Product Inquiry">Proprietary Product Inquiry</option>
+                      <option value="Mobile App Development">Mobile App Development</option>
+                      <option value="E-commerce Solutions">E-commerce Solutions</option>
+                      <option value="Web Development">Web Development</option>
+                      <option value="Training & Earning">Training & Earning</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Remote Developer Hiring">Remote Developer Hiring</option>
+                      <option value="Website Malware Detection & Removal">Website Malware Detection & Removal</option>
                     </select>
                   </div>
 
