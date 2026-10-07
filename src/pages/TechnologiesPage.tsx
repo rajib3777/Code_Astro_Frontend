@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { getTechnologies } from '@/api'
@@ -34,30 +35,20 @@ const FALLBACK_TECHS = [
   { id: 15, name: 'PyTorch & LLMs', slug: 'pytorch-llms', category: 'ai', description: 'Deep learning frameworks, fine-tuning, embeddings, and LangChain pipelines.', color: '#f472b6', website_url: 'https://pytorch.org', proficiency: 88 },
 ]
 
+
 export default function TechnologiesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const { data: techData } = useQuery({ queryKey: ['technologies'], queryFn: () => getTechnologies() })
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const technologies = techData?.results?.length ? techData.results : FALLBACK_TECHS
 
-  const filteredTechs = technologies.filter((tech: any) => {
-    if (selectedCategory === 'all') return true
-    if (selectedCategory === 'cloud' && (tech.category === 'cloud' || tech.category === 'devops')) return true
-    return tech.category === selectedCategory
-  })
+  const filteredTechs = useMemo(() => {
+    return technologies.filter((tech: any) => {
+      if (selectedCategory === 'all') return true
+      if (selectedCategory === 'cloud' && (tech.category === 'cloud' || tech.category === 'devops')) return true
+      return tech.category === selectedCategory
+    })
+  }, [technologies, selectedCategory])
 
   return (
     <>
@@ -94,19 +85,13 @@ export default function TechnologiesPage() {
         />
 
         {/* Radiant Blue Center Glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-            width: 'clamp(450px, 60vw, 850px)',
-            height: 'clamp(450px, 60vw, 850px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={20}
+          top="40%"
+          width="clamp(450px, 60vw, 850px)"
+          height="clamp(450px, 60vw, 850px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 3rem)', position: 'relative', zIndex: 10 }}>

@@ -47,23 +47,12 @@ const FALLBACK_TEAM = [
   { name: 'David K. Chen', role: 'Head of AI & Cloud Infrastructure', bio: 'PhD in Computer Science. Focuses on LLM pipeline orchestration, zero-downtime Kubernetes deployments, and cloud optimization.' },
 ]
 
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
+
 export default function AboutPage() {
   const { data: statsData } = useQuery({ queryKey: ['statistics'], queryFn: getStatistics })
   const { data: teamData } = useQuery({ queryKey: ['team'], queryFn: getTeam })
   const { data: settings } = useQuery({ queryKey: ['site-settings'], queryFn: getSiteSettings })
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const team = teamData?.results?.length ? teamData.results : FALLBACK_TEAM
 
@@ -103,19 +92,13 @@ export default function AboutPage() {
         />
 
         {/* Shiny Blue Radiant Energy Flare */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 25}px, ${mousePos.y * 25}px)`,
-            width: 'clamp(450px, 60vw, 900px)',
-            height: 'clamp(450px, 60vw, 900px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={25}
+          top="40%"
+          width="clamp(450px, 60vw, 900px)"
+          height="clamp(450px, 60vw, 900px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 3rem)', position: 'relative', zIndex: 10 }}>

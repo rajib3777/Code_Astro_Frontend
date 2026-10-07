@@ -38,7 +38,12 @@ export default function AboutUsSection() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true) },
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true)
+          obs.disconnect()
+        }
+      },
       { threshold: 0.02, rootMargin: '120px 0px' }
     )
     if (ref.current) obs.observe(ref.current)

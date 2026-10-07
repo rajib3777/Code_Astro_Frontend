@@ -909,22 +909,11 @@ const PRODUCTS_DATA: Record<string, ProductData> = {
   },
 }
 
+import HeroParallaxFlare from '@/components/ui/HeroParallaxFlare'
+
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const { data: apiProduct } = useQuery({
     queryKey: ['product', slug],
@@ -1073,15 +1062,7 @@ export default function ProductDetailPage() {
         />
 
         {/* Mouse Parallax Flare */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: `radial-gradient(circle 700px at calc(50% + ${mousePos.x * 35}px) calc(35% + ${mousePos.y * 35}px), ${accentColor}28 0%, rgba(0, 212, 255, 0.12) 40%, transparent 75%)`,
-            pointerEvents: 'none',
-            transition: 'background 0.2s ease-out',
-          }}
-        />
+        <HeroParallaxFlare accentColor={accentColor} />
 
         {/* Top Glow Ambient Orbs */}
         <div

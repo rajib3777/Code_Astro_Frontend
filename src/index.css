@@ -100,7 +100,6 @@
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   color-scheme: dark;
   overflow-x: clip;
@@ -753,9 +752,9 @@ html, body {
 }
 * { min-width: 0; }
 
-/* Mobile hardware acceleration & layer stabilization (eliminates blank flashes and shaky motion) */
+/* Mobile hardware acceleration & layer stabilization (targeted to active animators only) */
 @media (max-width: 768px) {
-  .ticker-wrap, .ticker-inner, #hero svg, .sec, section {
+  .ticker-wrap, .ticker-inner, #hero svg {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
@@ -767,6 +766,12 @@ html, body {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+}
+
+/* Offscreen rendering optimization — skips layout & paint passes for offscreen sections until near viewport */
+section:not(#hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* ── Tablet & below (≤ 900px) ── */

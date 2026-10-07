@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { getProjects } from '@/api'
@@ -308,27 +309,17 @@ function ProjectDrawerCard({ project, index }: { project: any; index: number }) 
   )
 }
 
+
 export default function ProjectsPage() {
   const { data } = useQuery({ queryKey: ['projects-all'], queryFn: () => getProjects() })
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const projects = data?.results?.length ? data.results : FALLBACK_PROJECTS
-  const filtered = selectedCategory === 'all'
-    ? projects
-    : projects.filter((p: any) => p.category === selectedCategory || p.slug.includes(selectedCategory))
+  const filtered = useMemo(() => {
+    return selectedCategory === 'all'
+      ? projects
+      : projects.filter((p: any) => p.category === selectedCategory || p.slug.includes(selectedCategory))
+  }, [selectedCategory, projects])
 
   return (
     <>
@@ -365,19 +356,13 @@ export default function ProjectsPage() {
         />
 
         {/* Radiant Blue Center Glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-            width: 'clamp(450px, 60vw, 850px)',
-            height: 'clamp(450px, 60vw, 850px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={20}
+          top="40%"
+          width="clamp(450px, 60vw, 850px)"
+          height="clamp(450px, 60vw, 850px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 3rem)', position: 'relative', zIndex: 10 }}>

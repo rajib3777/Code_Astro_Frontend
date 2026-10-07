@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { getIndustries } from '@/api'
@@ -489,43 +490,33 @@ function IndustryDrawerCard({ ind, index, open, onToggle }: IndustryCardProps) {
   )
 }
 
+
 export default function IndustriesPage() {
   const [openCardIndex, setOpenCardIndex] = useState<number>(0)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   const { data: indData } = useQuery({
     queryKey: ['industries'],
     queryFn: getIndustries,
   })
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth - 0.5) * 2,
-        y: (e.clientY / innerHeight - 0.5) * 2,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   const rawIndustries = indData?.results && indData.results.length > 0 ? indData.results : FALLBACK_INDUSTRIES
 
-  const industries = rawIndustries.map((item: any, i: number) => {
-    const fallback = FALLBACK_INDUSTRIES[i % FALLBACK_INDUSTRIES.length]
-    return {
-      id: item.id || fallback.id,
-      name: item.name || fallback.name,
-      slug: item.slug || fallback.slug,
-      description: item.description || fallback.description,
-      short_description: item.short_description || fallback.short_description,
-      features: item.features && item.features.length > 0 ? item.features : fallback.features,
-      regulations: fallback.regulations,
-      sla: fallback.sla,
-      iconName: fallback.iconName,
-    }
-  })
+  const industries = useMemo(() => {
+    return rawIndustries.map((item: any, i: number) => {
+      const fallback = FALLBACK_INDUSTRIES[i % FALLBACK_INDUSTRIES.length]
+      return {
+        id: item.id || fallback.id,
+        name: item.name || fallback.name,
+        slug: item.slug || fallback.slug,
+        description: item.description || fallback.description,
+        short_description: item.short_description || fallback.short_description,
+        features: item.features && item.features.length > 0 ? item.features : fallback.features,
+        regulations: fallback.regulations,
+        sla: fallback.sla,
+        iconName: fallback.iconName,
+      }
+    })
+  }, [rawIndustries])
 
   return (
     <>
@@ -565,19 +556,13 @@ export default function IndustriesPage() {
         />
 
         {/* Radiant Blue Center Glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-            width: 'clamp(450px, 60vw, 850px)',
-            height: 'clamp(450px, 60vw, 850px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={20}
+          top="40%"
+          width="clamp(450px, 60vw, 850px)"
+          height="clamp(450px, 60vw, 850px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div

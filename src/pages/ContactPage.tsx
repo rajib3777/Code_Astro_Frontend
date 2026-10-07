@@ -24,23 +24,12 @@ const BUDGET_RANGES = [
   "Let's discuss",
 ]
 
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
+
 export default function ContactPage() {
   const { data: settings } = useQuery({ queryKey: ['site-settings'], queryFn: getSiteSettings })
   const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', project_type: '', budget: '', message: '' })
   const [success, setSuccess] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const mutation = useMutation({
     mutationFn: submitContact,
@@ -101,19 +90,13 @@ export default function ContactPage() {
         />
 
         {/* Radiant Blue Center Glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-            width: 'clamp(450px, 60vw, 850px)',
-            height: 'clamp(450px, 60vw, 850px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={20}
+          top="40%"
+          width="clamp(450px, 60vw, 850px)"
+          height="clamp(450px, 60vw, 850px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', padding: '0 clamp(1.25rem, 4vw, 3rem)', position: 'relative', zIndex: 10 }}>

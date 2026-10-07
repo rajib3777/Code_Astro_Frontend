@@ -9,9 +9,13 @@ const FALLBACK_CLIENTS = [
   'Linear', 'Loom', 'Webflow', 'Framer', 'Shopify',
 ]
 
-export default function ClientsSection(_props: ClientsSectionProps = {}) {
-  const { data } = useQuery({ queryKey: ['clients'], queryFn: getClients })
-  const clients = data?.results?.length ? data.results : null
+export default function ClientsSection({ clients: propClients }: ClientsSectionProps = {}) {
+  const { data } = useQuery({
+    queryKey: ['clients'],
+    queryFn: getClients,
+    enabled: !propClients || propClients.length === 0,
+  })
+  const clients = (propClients && propClients.length > 0) ? propClients : (data?.results?.length ? data.results : null)
 
   const items = clients
     ? clients.map((c) => c.name)

@@ -101,7 +101,14 @@ export default function Navbar({ settings }: { settings?: SiteSettings }) {
   const companyName = settings?.company_name || 'Code Astro'
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    let lastScrolled = false
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 20
+      if (isScrolled !== lastScrolled) {
+        lastScrolled = isScrolled
+        setScrolled(isScrolled)
+      }
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])

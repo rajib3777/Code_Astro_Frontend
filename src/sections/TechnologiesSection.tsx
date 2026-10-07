@@ -540,12 +540,13 @@ export default function TechnologiesSection({ technologies }: { technologies?: a
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Zero-Latency Scroll Handler (120 FPS via requestAnimationFrame + Single Rect query)
+  // Zero-Latency Scroll Handler (120 FPS via requestAnimationFrame + IntersectionObserver gating)
   useEffect(() => {
+    let isNearViewport = false
     let rAF: number | null = null
 
     const handleScroll = () => {
-      if (rAF !== null) return
+      if (!isNearViewport || rAF !== null) return
       rAF = window.requestAnimationFrame(() => {
         if (sectionRef.current) {
           const rect = sectionRef.current.getBoundingClientRect()
@@ -557,9 +558,9 @@ export default function TechnologiesSection({ technologies }: { technologies?: a
           const currentDistance = startTrigger - rect.top
 
           const p = Math.max(0, Math.min(1, currentDistance / Math.max(1, totalDistance)))
-          // Quantize progress to avoid re-rendering 20 cards on every sub-pixel scroll on mobile
+          // Quantize progress to avoid re-rendering cards on every sub-pixel scroll
           setScrollProgress((prev) => {
-            if (Math.abs(prev - p) < 0.012 && p > 0 && p < 1) return prev
+            if (Math.abs(prev - p) < 0.015 && p > 0 && p < 1) return prev
             return p
           })
         }
@@ -567,10 +568,24 @@ export default function TechnologiesSection({ technologies }: { technologies?: a
       })
     }
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isNearViewport = entry.isIntersecting
+        if (isNearViewport) {
+          handleScroll()
+        }
+      },
+      { rootMargin: '350px 0px' }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
 
     return () => {
+      observer.disconnect()
       window.removeEventListener('scroll', handleScroll)
       if (rAF !== null) cancelAnimationFrame(rAF)
     }

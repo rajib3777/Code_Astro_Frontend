@@ -542,21 +542,10 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   'malware-detection-removal': malwareData,
 }
 
+import HeroParallaxFlare from '@/components/ui/HeroParallaxFlare'
+
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth) * 2 - 1,
-        y: (e.clientY / innerHeight) * 2 - 1,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const { data: allServicesData } = useQuery({
     queryKey: ['services'],
@@ -711,15 +700,7 @@ export default function ServiceDetailPage() {
         />
 
         {/* Mouse Parallax Flare */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: `radial-gradient(circle 700px at calc(50% + ${mousePos.x * 35}px) calc(35% + ${mousePos.y * 35}px), ${accentColor}28 0%, rgba(0, 212, 255, 0.12) 40%, transparent 75%)`,
-            pointerEvents: 'none',
-            transition: 'background 0.2s ease-out',
-          }}
-        />
+        <HeroParallaxFlare accentColor={accentColor} />
 
         {/* Ambient Top Glow Orbs */}
         <div

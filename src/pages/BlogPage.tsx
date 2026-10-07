@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import PageHeroOrb from '@/components/ui/PageHeroOrb'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { getBlogPosts, getBlogCategories } from '@/api'
@@ -116,12 +117,12 @@ const FALLBACK_POSTS: BlogPost[] = [
   },
 ]
 
+
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const [emailInput, setEmailInput] = useState('')
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   const { data: postsData } = useQuery({
     queryKey: ['blog-posts'],
@@ -131,18 +132,6 @@ export default function BlogPage() {
     queryKey: ['blog-categories'],
     queryFn: getBlogCategories,
   })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      setMousePos({
-        x: (e.clientX / innerWidth - 0.5) * 2,
-        y: (e.clientY / innerHeight - 0.5) * 2,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const rawPosts: BlogPost[] =
     postsData?.results && postsData.results.length > 0 ? postsData.results : FALLBACK_POSTS
@@ -155,18 +144,20 @@ export default function BlogPage() {
     { id: 5, name: 'Embedded Systems', slug: 'embedded-systems', color: '#60a5fa' },
   ]
 
-  const filteredPosts = rawPosts.filter(post => {
-    const matchesCat =
-      selectedCategory === 'all' ||
-      post.category?.slug === selectedCategory ||
-      post.category?.name.toLowerCase().includes(selectedCategory.toLowerCase())
-    const matchesSearch =
-      searchQuery === '' ||
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.author_name.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCat && matchesSearch
-  })
+  const filteredPosts = useMemo(() => {
+    return rawPosts.filter(post => {
+      const matchesCat =
+        selectedCategory === 'all' ||
+        post.category?.slug === selectedCategory ||
+        post.category?.name.toLowerCase().includes(selectedCategory.toLowerCase())
+      const matchesSearch =
+        searchQuery === '' ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.author_name.toLowerCase().includes(searchQuery.toLowerCase())
+      return matchesCat && matchesSearch
+    })
+  }, [rawPosts, selectedCategory, searchQuery])
 
   const featuredPost = rawPosts.find(p => p.is_featured) || rawPosts[0]
 
@@ -208,19 +199,13 @@ export default function BlogPage() {
         />
 
         {/* Radiant Center Glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: `translate(-50%, -50%) translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
-            width: 'clamp(450px, 60vw, 800px)',
-            height: 'clamp(450px, 60vw, 800px)',
-            background: 'radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            pointerEvents: 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
+        <PageHeroOrb
+          factor={20}
+          top="40%"
+          width="clamp(450px, 60vw, 800px)"
+          height="clamp(450px, 60vw, 800px)"
+          background="radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)"
+          filter="blur(90px)"
         />
 
         <div
