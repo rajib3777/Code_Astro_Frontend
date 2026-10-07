@@ -158,31 +158,27 @@ export default function Navbar({ settings }: { settings?: SiteSettings }) {
         }}
       >
         <div className="wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
-          {/* Brand Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 10,
-                background: 'linear-gradient(135deg, #0066ff 0%, #00d4ff 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 20px rgba(0, 102, 255, 0.6)',
-                transition: 'transform 0.25s ease',
-              }}
-            >
-              <Zap size={18} color="#fff" />
-            </div>
-            <div>
-              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-                {companyName}
-              </div>
-              <div style={{ fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#00d4ff' }}>
-                Software Engineering Lab
-              </div>
-            </div>
+          {/* Official Brand Logo */}
+          <Link
+            to="/"
+            className="ca-brand-badge group"
+            aria-label="Code Astro — Software Engineering Lab"
+            style={{ flexShrink: 0 }}
+          >
+            {/* Ambient Backlight Glow */}
+            <div className="ca-brand-ambient" aria-hidden="true" />
+
+            {/* Official Logo Graphic */}
+            <img
+              src="/logo.png"
+              srcSet="/logo.png 1x, /logo@2x.png 2x"
+              alt="Code Astro"
+              className="ca-brand-img ca-nav-logo-img"
+              width={160}
+              height={38}
+              fetchPriority="high"
+              decoding="async"
+            />
           </Link>
 
           {/* Desktop Navigation — Grouped Menu & Submenus */}

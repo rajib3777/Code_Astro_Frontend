@@ -898,3 +898,81 @@ html, body {
   .hide-mobile { display: none !important; }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   OFFICIAL BRAND LOGO — HIGHLIGHT & GLOW STYLES
+   ═══════════════════════════════════════════════════════════════ */
+.ca-brand-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 12px;
+  padding: 2px 4px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ca-brand-badge:hover {
+  transform: translateY(-1px);
+}
+
+/* Ambient backlight behind the logo */
+.ca-brand-ambient {
+  position: absolute;
+  inset: -6px -12px;
+  background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.32) 0%, rgba(0, 212, 255, 0.18) 40%, rgba(139, 92, 246, 0.1) 65%, transparent 75%);
+  filter: blur(12px);
+  opacity: 0.65;
+  pointer-events: none;
+  border-radius: 20px;
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+  z-index: 0;
+}
+
+.ca-brand-badge:hover .ca-brand-ambient {
+  opacity: 1;
+  filter: blur(16px);
+  transform: scale(1.08);
+  background: radial-gradient(ellipse at center, rgba(0, 150, 255, 0.5) 0%, rgba(0, 212, 255, 0.35) 40%, rgba(168, 85, 247, 0.22) 65%, transparent 80%);
+}
+
+/* Crisp logo image with luminous drop-shadow */
+.ca-brand-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(0, 102, 255, 0.42)) drop-shadow(0 0 3px rgba(0, 212, 255, 0.3));
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ca-brand-badge:hover .ca-brand-img {
+  filter: drop-shadow(0 0 22px rgba(0, 212, 255, 0.8)) drop-shadow(0 0 9px rgba(0, 102, 255, 0.65)) brightness(1.08);
+  transform: scale(1.03);
+}
+
+/* Specific sizing */
+.ca-nav-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 175px;
+}
+
+.ca-footer-logo-img {
+  height: 44px;
+  width: auto;
+  max-width: 195px;
+}
+
+@media (max-width: 640px) {
+  .ca-nav-logo-img {
+    height: 32px;
+    max-width: 145px;
+  }
+  .ca-footer-logo-img {
+    height: 38px;
+    max-width: 165px;
+  }
+}
+

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Zap, Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
 import type { SiteSettings } from '@/types/api'
 
 function GithubIcon({ size = 15, color = 'currentColor' }: { size?: number; color?: string }) {
@@ -132,31 +132,27 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
         >
           {/* Brand column */}
           <div className="ca-footer-brand" style={{ gridColumn: 'span 1', width: '100%', minWidth: 0 }}>
-            {/* Logo */}
-            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', marginBottom: 20 }}>
-              <div
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 12,
-                  background: 'linear-gradient(135deg, #0066ff, #00aaff)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 0 20px rgba(0,102,255,0.4)',
-                  flexShrink: 0,
-                }}
-              >
-                <Zap size={20} color="#fff" />
-              </div>
-              <div>
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
-                  {company}
-                </div>
-                <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#60a5fa' }}>
-                  Software Engineering Lab
-                </div>
-              </div>
+            {/* Official Brand Logo */}
+            <Link
+              to="/"
+              className="ca-brand-badge group"
+              aria-label="Code Astro — Software Engineering Lab"
+              style={{ marginBottom: 20, display: 'inline-flex' }}
+            >
+              {/* Ambient Backlight Glow */}
+              <div className="ca-brand-ambient" aria-hidden="true" />
+
+              {/* Official Logo Graphic */}
+              <img
+                src="/logo.png"
+                srcSet="/logo.png 1x, /logo@2x.png 2x"
+                alt="Code Astro"
+                className="ca-brand-img ca-footer-logo-img"
+                width={180}
+                height={44}
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
 
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.7, marginBottom: 24, maxWidth: 260 }}>
